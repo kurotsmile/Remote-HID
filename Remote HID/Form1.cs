@@ -2,6 +2,7 @@
 
 
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Remote_HID
 {
@@ -17,7 +18,7 @@ namespace Remote_HID
         string[,] actions = new string[,]
         {
                 { "Tắt máy", "Khởi động lại", "Ngủ", "Powershell", "This Pc" },
-                { "Star Menu", "Thông tin", "Tìm kiếm", "Đổi mật khẩu", "Người dùng" },
+                { "Star Menu", "Trình Đa nhiệm", "Tìm kiếm", "Đổi mật khẩu", "Người dùng" },
                 { "Thông báo", "Lịch sử", "Báo cáo", "Kết nối", "Thông tin hệ thống" },
                 { "Cập nhật", "Gỡ bỏ", "Tùy chọn", "Hướng dẫn", "Quản lý" },
                 { "Thoát", "Khôi phục", "Cài đặt hệ thống", "Quản lý người dùng", "Đăng nhập" },
@@ -35,7 +36,7 @@ namespace Remote_HID
             },
             {
                 Image.FromStream(new MemoryStream(Properties.Resources.start_menu)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
+                Image.FromStream(new MemoryStream(Properties.Resources.apps)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer))
@@ -203,13 +204,38 @@ namespace Remote_HID
             if (currentRow == 0 && currentCol == 1) Process.Start("shutdown", "/r /f /t 0");
             if (currentRow == 0 && currentCol == 2) Process.Start("rundll32.exe", "powrprof.dll,SetSuspendState Sleep");
             if (currentRow == 0 && currentCol == 3) Process.Start("powershell.exe");
-            if (currentRow == 0 && currentCol == 4) Process.Start("explorer.exe", "shell:MyComputerFolder");
+            if (currentRow == 0 && currentCol == 4)
+            {
+                this.Hide();
+                Process.Start("explorer.exe", "shell:MyComputerFolder");
+            }
 
             if (currentRow == 1 && currentCol == 0)
             {
                 this.Hide();
                 SendKeys.SendWait("^{ESC}");
             }
+
+            if (currentRow == 1 && currentCol == 1)
+            {
+                this.Hide();
+                this.OpenTaskView();
+            }
+        }
+
+        [DllImport("user32.dll")]
+        private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
+
+        private const byte VK_LWIN = 0x5B;
+        private const byte VK_TAB = 0x09;
+        private const uint KEYEVENTF_KEYUP = 0x0002;
+
+        public void OpenTaskView()
+        {
+            keybd_event(VK_LWIN, 0, 0, 0);
+            keybd_event(VK_TAB, 0, 0, 0);
+            keybd_event(VK_TAB, 0, KEYEVENTF_KEYUP, 0);
+            keybd_event(VK_LWIN, 0, KEYEVENTF_KEYUP, 0);
         }
 
     }

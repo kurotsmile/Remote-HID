@@ -113,6 +113,16 @@ namespace Remote_HID.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] notification {
+            get {
+                object obj = ResourceManager.GetObject("notification", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] power_off {
             get {
                 object obj = ResourceManager.GetObject("power_off", resourceCulture);
@@ -166,6 +176,16 @@ namespace Remote_HID.Properties {
         internal static byte[] start_menu {
             get {
                 object obj = ResourceManager.GetObject("start_menu", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] youtube {
+            get {
+                object obj = ResourceManager.GetObject("youtube", resourceCulture);
                 return ((byte[])(obj));
             }
         }

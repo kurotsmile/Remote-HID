@@ -15,11 +15,13 @@ namespace Remote_HID
         private int currentRow = 0;
         private int currentCol = 0;
         private GlobalKeyHook hook;
+        private ActionSystem actSys;
+
         string[,] actions = new string[,]
         {
                 { "Tắt máy", "Khởi động lại", "Ngủ", "Powershell", "This Pc" },
-                { "Star Menu", "Trình Đa nhiệm", "Tìm kiếm", "Đổi mật khẩu", "Người dùng" },
-                { "Thông báo", "Lịch sử", "Báo cáo", "Kết nối", "Thông tin hệ thống" },
+                { "Start Menu", "Trình Đa nhiệm", "Cài đặt", "Game PS2", "Youtube" },
+                { "Màn hình", "Thông báo", "Báo cáo", "Kết nối", "Thông tin hệ thống" },
                 { "Cập nhật", "Gỡ bỏ", "Tùy chọn", "Hướng dẫn", "Quản lý" },
                 { "Thoát", "Khôi phục", "Cài đặt hệ thống", "Quản lý người dùng", "Đăng nhập" },
                 { "Chạy ứng dụng", "Hẹn giờ", "Tải xuống", "Ghi chú", "Mở thư mục" }
@@ -37,13 +39,13 @@ namespace Remote_HID
             {
                 Image.FromStream(new MemoryStream(Properties.Resources.start_menu)),
                 Image.FromStream(new MemoryStream(Properties.Resources.apps)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer))
+                Image.FromStream(new MemoryStream(Properties.Resources.setting)),
+                Image.FromStream(new MemoryStream(Properties.Resources.game)),
+                Image.FromStream(new MemoryStream(Properties.Resources.youtube))
             },
             {
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
+                Image.FromStream(new MemoryStream(Properties.Resources.display)),
+                Image.FromStream(new MemoryStream(Properties.Resources.notification)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer))
@@ -98,6 +100,7 @@ namespace Remote_HID
             this.StartPosition = FormStartPosition.CenterScreen;
             GlobalKeyHook hook = new GlobalKeyHook();
             hook.Start(this);
+            this.actSys = new ActionSystem();
         }
 
         private void ShowWindow(object sender, EventArgs e)
@@ -147,7 +150,9 @@ namespace Remote_HID
                         Font = new Font("Verdana", 15, FontStyle.Regular),
                         Tag = new Point(i, j),
                         FlatStyle = FlatStyle.Flat,
-                        ForeColor = Color.Black
+                        ForeColor = Color.Black,
+                        Padding = new Padding(0),
+                        Margin = new Padding(0)
                     };
                     btn.Image = icons[i, j];
                     btn.ImageAlign = ContentAlignment.TopCenter;
@@ -219,23 +224,38 @@ namespace Remote_HID
             if (currentRow == 1 && currentCol == 1)
             {
                 this.Hide();
-                this.OpenTaskView();
+                this.actSys.OpenTaskView();
             }
-        }
 
-        [DllImport("user32.dll")]
-        private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
+            if (currentRow == 1 && currentCol == 2)
+            {
+                this.Hide();
+                this.actSys.OpenSettings();
+            }
 
-        private const byte VK_LWIN = 0x5B;
-        private const byte VK_TAB = 0x09;
-        private const uint KEYEVENTF_KEYUP = 0x0002;
+            if (currentRow == 1 && currentCol == 3)
+            {
+                this.Hide();
+                this.actSys.OpenProgram(@"J:\PCSX2\pcsx2-qt.exe");
+            }
 
-        public void OpenTaskView()
-        {
-            keybd_event(VK_LWIN, 0, 0, 0);
-            keybd_event(VK_TAB, 0, 0, 0);
-            keybd_event(VK_TAB, 0, KEYEVENTF_KEYUP, 0);
-            keybd_event(VK_LWIN, 0, KEYEVENTF_KEYUP, 0);
+            if (currentRow == 1 && currentCol == 4)
+            {
+                this.Hide();
+                this.actSys.OpenUrl("https://www.youtube.com/");
+            }
+
+            if (currentRow == 2 && currentCol == 0)
+            {
+                this.Hide();
+                this.actSys.OpenProjectMenu();
+            }
+
+            if (currentRow == 2 && currentCol == 1)
+            {
+                this.Hide();
+                this.actSys.OpenActionCenter();
+            }
         }
 
     }

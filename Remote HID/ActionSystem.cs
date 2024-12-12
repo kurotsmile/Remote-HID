@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 namespace Remote_HID
 {
-    internal class ActionSystem
+    public class ActionSystem
     {
         [DllImport("user32.dll")]
         private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
@@ -89,6 +89,18 @@ namespace Remote_HID
 
             keybd_event(VK_A, 0, KEYEVENTF_KEYUP, 0);
             keybd_event(VK_LWIN, 0, KEYEVENTF_KEYUP, 0);
+        }
+
+        public void OpenOnScreenKeyboard()
+        {
+            try
+            {
+                Process.Start("osk.exe");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Không thể mở bàn phím ảo: " + ex.Message);
+            }
         }
     }
 }

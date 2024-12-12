@@ -14,14 +14,16 @@ namespace Remote_HID
         private int currentRow = 0;
         private int currentCol = 0;
         private GlobalKeyHook hook;
+
         private ActionSystem actSys;
+        private ActionSpeech actSpeech;
 
         string[,] actions = new string[,]
         {
                 { "Tắt máy", "Khởi động lại", "Ngủ", "Powershell", "This Pc" },
                 { "Start Menu", "Trình Đa nhiệm", "Cài đặt", "Game PS2", "Youtube" },
                 { "Màn hình", "Thông báo", "Outlook Email", "Kết nối", "Bluetooth" },
-                { "Cập nhật", "Gỡ bỏ", "Tùy chọn", "Hướng dẫn", "Quản lý" },
+                { "Bàn phím ảo", "Khẩu lệnh", "Tùy chọn", "Hướng dẫn", "Quản lý" },
                 { "Thoát", "Khôi phục", "Cài đặt hệ thống", "Quản lý người dùng", "Đăng nhập" },
                 { "Chạy ứng dụng", "Hẹn giờ", "Tải xuống", "Ghi chú", "Mở thư mục" },
                 { "Chạy ứng dụng", "Hẹn giờ", "Tải xuống", "Ghi chú", "Mở thư mục" },
@@ -52,8 +54,8 @@ namespace Remote_HID
                 Image.FromStream(new MemoryStream(Properties.Resources.bluetooth))
             },
             {
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
+                Image.FromStream(new MemoryStream(Properties.Resources.keyboard)),
+                Image.FromStream(new MemoryStream(Properties.Resources.mic_on)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer))
@@ -117,6 +119,9 @@ namespace Remote_HID
 
             EffectBlur effectBlur = new EffectBlur();
             effectBlur.EnableBlur(this.Handle);
+
+            this.actSpeech = new ActionSpeech();
+            this.actSpeech.InitializeSpeechRecognition(this);
         }
 
         private void ShowWindow(object sender, EventArgs e)
@@ -163,7 +168,7 @@ namespace Remote_HID
                         Text = actions[i, j],
                         Dock = DockStyle.Fill,
                         BackColor = Color.Blue,
-                        Font = new Font("Verdana", 15, FontStyle.Regular),
+                        Font = new Font("Segoe UI", 15, FontStyle.Regular),
                         Tag = new Point(i, j),
                         FlatStyle = FlatStyle.Flat,
                         ForeColor = Color.Black,
@@ -173,15 +178,13 @@ namespace Remote_HID
                     btn.FlatAppearance.BorderSize = 0;
                     btn.Image = icons[i, j];
                     btn.ImageAlign = ContentAlignment.TopCenter;
-                    btn.TextAlign = ContentAlignment.BottomCenter;
+                    btn.TextAlign = ContentAlignment.MiddleCenter;
                     btn.TextImageRelation = TextImageRelation.ImageAboveText;
                     buttons[i, j] = btn;
                     table.Controls.Add(btn, j, i);
                 }
             }
-
             HighlightButton(currentRow, currentCol);
-
             this.Controls.Add(table);
         }
 
@@ -294,6 +297,12 @@ namespace Remote_HID
                 this.Hide();
                 this.actSys.OpenSettingBluetooth();
             }
+
+            if (currentRow == 3 && currentCol == 0)
+            {
+                this.Hide();
+                this.actSys.OpenOnScreenKeyboard();
+            }
             this.PlaySound(Properties.Resources.enterMenu);
         }
 
@@ -306,6 +315,16 @@ namespace Remote_HID
                     player.Play();
                 }
             }
+        }
+
+        public Button get_Btn_speech()
+        {
+            return buttons[3, 1];
+        }
+
+        public ActionSystem act_sys()
+        {
+            return this.actSys;
         }
 
     }

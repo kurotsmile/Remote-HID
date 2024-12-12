@@ -178,4 +178,13 @@
   <data name="boxOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\boxOpen.wav;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\keyboard.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mic_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mic_on.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mic_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mic_off.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

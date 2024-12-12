@@ -1,7 +1,6 @@
 ﻿
-
-
 using System.Diagnostics;
+using System.Media;
 using System.Runtime.InteropServices;
 
 namespace Remote_HID
@@ -21,9 +20,11 @@ namespace Remote_HID
         {
                 { "Tắt máy", "Khởi động lại", "Ngủ", "Powershell", "This Pc" },
                 { "Start Menu", "Trình Đa nhiệm", "Cài đặt", "Game PS2", "Youtube" },
-                { "Màn hình", "Thông báo", "Báo cáo", "Kết nối", "Thông tin hệ thống" },
+                { "Màn hình", "Thông báo", "Outlook Email", "Kết nối", "Bluetooth" },
                 { "Cập nhật", "Gỡ bỏ", "Tùy chọn", "Hướng dẫn", "Quản lý" },
                 { "Thoát", "Khôi phục", "Cài đặt hệ thống", "Quản lý người dùng", "Đăng nhập" },
+                { "Chạy ứng dụng", "Hẹn giờ", "Tải xuống", "Ghi chú", "Mở thư mục" },
+                { "Chạy ứng dụng", "Hẹn giờ", "Tải xuống", "Ghi chú", "Mở thư mục" },
                 { "Chạy ứng dụng", "Hẹn giờ", "Tải xuống", "Ghi chú", "Mở thư mục" }
         };
 
@@ -46,6 +47,20 @@ namespace Remote_HID
             {
                 Image.FromStream(new MemoryStream(Properties.Resources.display)),
                 Image.FromStream(new MemoryStream(Properties.Resources.notification)),
+                Image.FromStream(new MemoryStream(Properties.Resources.email)),
+                Image.FromStream(new MemoryStream(Properties.Resources.router)),
+                Image.FromStream(new MemoryStream(Properties.Resources.bluetooth))
+            },
+            {
+                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
+                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
+                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
+                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
+                Image.FromStream(new MemoryStream(Properties.Resources.computer))
+            },
+            {
+                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
+                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer)),
                 Image.FromStream(new MemoryStream(Properties.Resources.computer))
@@ -94,13 +109,14 @@ namespace Remote_HID
             this.Icon = new Icon(new MemoryStream(Properties.Resources.icon_app));
             this.KeyPreview = false;
             this.Load += (s, e) => { this.Hide(); };
-            EffectBlur effectBlur = new EffectBlur();
-            effectBlur.EnableBlur(this.Handle);
-            InitializeGrid(6, 5);
+            InitializeGrid(8, 5);
             this.StartPosition = FormStartPosition.CenterScreen;
             GlobalKeyHook hook = new GlobalKeyHook();
             hook.Start(this);
             this.actSys = new ActionSystem();
+
+            EffectBlur effectBlur = new EffectBlur();
+            effectBlur.EnableBlur(this.Handle);
         }
 
         private void ShowWindow(object sender, EventArgs e)
@@ -154,6 +170,7 @@ namespace Remote_HID
                         Padding = new Padding(0),
                         Margin = new Padding(0)
                     };
+                    btn.FlatAppearance.BorderSize = 0;
                     btn.Image = icons[i, j];
                     btn.ImageAlign = ContentAlignment.TopCenter;
                     btn.TextAlign = ContentAlignment.BottomCenter;
@@ -174,6 +191,7 @@ namespace Remote_HID
             {
                 btn.BackColor = Color.Black;
                 btn.ForeColor = Color.FromArgb(60, 30, 40);
+                btn.FlatAppearance.BorderSize = 0;
             }
             buttons[row, col].BackColor = Color.SkyBlue;
             buttons[row, col].ForeColor = Color.AliceBlue;
@@ -201,6 +219,7 @@ namespace Remote_HID
             currentRow = newRow;
             currentCol = newCol;
             HighlightButton(currentRow, currentCol);
+            this.PlaySound(Properties.Resources.selectClick);
         }
 
         public void Act_Menu()
@@ -245,6 +264,7 @@ namespace Remote_HID
                 this.actSys.OpenUrl("https://www.youtube.com/");
             }
 
+
             if (currentRow == 2 && currentCol == 0)
             {
                 this.Hide();
@@ -255,6 +275,36 @@ namespace Remote_HID
             {
                 this.Hide();
                 this.actSys.OpenActionCenter();
+            }
+
+            if (currentRow == 2 && currentCol == 2)
+            {
+                this.Hide();
+                this.actSys.OpenUrl("https://mail.google.com/");
+            }
+
+            if (currentRow == 2 && currentCol == 3)
+            {
+                this.Hide();
+                this.actSys.OpenSettingWifi();
+            }
+
+            if (currentRow == 2 && currentCol == 4)
+            {
+                this.Hide();
+                this.actSys.OpenSettingBluetooth();
+            }
+            this.PlaySound(Properties.Resources.enterMenu);
+        }
+
+        public void PlaySound(byte[] data_sound)
+        {
+            using (MemoryStream stream = new MemoryStream(data_sound))
+            {
+                using (SoundPlayer player = new SoundPlayer(stream))
+                {
+                    player.Play();
+                }
             }
         }
 

@@ -21,6 +21,24 @@ namespace Remote_HID
             });
         }
 
+        public void OpenSettingWifi()
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "ms-settings:network-wifi",
+                UseShellExecute = true
+            });
+        }
+
+        public void OpenSettingBluetooth()
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "settings:bluetooth",
+                UseShellExecute = true
+            });
+        }
+
         public void OpenTaskView()
         {
             keybd_event(VK_LWIN, 0, 0, 0);

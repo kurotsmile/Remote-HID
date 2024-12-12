@@ -12,7 +12,8 @@ namespace Remote_HID
             var accent = new AccentPolicy
             {
                 AccentState = accentState,
-                GradientColor = 0x00333333 // Màu trong suốt (AARRGGBB)
+                GradientColor = (0 << 24) | (0x33 << 16) | (0x33 << 8) | 0x66,
+                AnimationId =1
             };
             int sizeOfPolicy = Marshal.SizeOf(accent);
             IntPtr accentPtr = Marshal.AllocHGlobal(sizeOfPolicy);

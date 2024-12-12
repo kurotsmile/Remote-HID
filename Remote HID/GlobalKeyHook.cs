@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Remote_HID
 {
@@ -51,15 +46,22 @@ namespace Remote_HID
                 if ((Keys)vkCode == Keys.Apps)
                 {
                     if (frm.Visible)
+                    {
+                        frm.PlaySound(Properties.Resources.boxClose);
                         frm.Hide();
+                    }
                     else
+                    {
+                        frm.PlaySound(Properties.Resources.boxOpen);
                         frm.Show();
+                    }
                     return (IntPtr)0;
                 }
 
                 if (frm.Visible)
                 {
                     if ((Keys)vkCode == Keys.Enter) frm.Act_Menu();
+                    if ((Keys)vkCode == Keys.Back) frm.Act_Menu();
                     if ((Keys)vkCode == Keys.Left) frm.Move_menu(Keys.Left);
                     if ((Keys)vkCode == Keys.Right) frm.Move_menu(Keys.Right);
                     if ((Keys)vkCode == Keys.Up) frm.Move_menu(Keys.Up);

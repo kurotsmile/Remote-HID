@@ -157,4 +157,25 @@
   <data name="notification" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\notification.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="email" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\email.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="router" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\router.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bluetooth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bluetooth.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="selectClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\selectClick.wav;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="enterMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\enterMenu.wav;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="boxClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boxClose.wav;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="boxOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boxOpen.wav;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

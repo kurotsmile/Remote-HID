@@ -307,4 +307,25 @@
   <data name="zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="music" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\music.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="live_chat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\live_chat.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gardening" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gardening.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="register" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\register.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cmd.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\photo.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="screenshot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\screenshot.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

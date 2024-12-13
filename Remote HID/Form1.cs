@@ -99,6 +99,13 @@ namespace Remote_HID
             this.actItems.Add(new Act_item { name = "Disk", cmd = "diskmgmt.msc", icon = Image.FromStream(new MemoryStream(Properties.Resources.ssd))});
             this.actItems.Add(new Act_item { name = "Font", cmd = "control fonts", icon = Image.FromStream(new MemoryStream(Properties.Resources.font))});
             this.actItems.Add(new Act_item { name = "Zoom", cmd = "magnify", icon = Image.FromStream(new MemoryStream(Properties.Resources.zoom))});
+            this.actItems.Add(new Act_item { name = "Music", cmd = "msmusic:", icon = Image.FromStream(new MemoryStream(Properties.Resources.music))});
+            this.actItems.Add(new Act_item { name = "Telegram", cmd = "https://web.telegram.org/k/", icon = Image.FromStream(new MemoryStream(Properties.Resources.live_chat))});
+            this.actItems.Add(new Act_item { name = "Tool", cmd = "notepad++", icon = Image.FromStream(new MemoryStream(Properties.Resources.gardening))});
+            this.actItems.Add(new Act_item { name = "Regedit", cmd = "regedit", icon = Image.FromStream(new MemoryStream(Properties.Resources.register))});
+            this.actItems.Add(new Act_item { name = "cmd", cmd = "cmd", icon = Image.FromStream(new MemoryStream(Properties.Resources.cmd))});
+            this.actItems.Add(new Act_item { name = "Photo", cmd = "ms-photos:", icon = Image.FromStream(new MemoryStream(Properties.Resources.photo))});
+            this.actItems.Add(new Act_item { name = "Screenshot", cmd = "snippingtool", icon = Image.FromStream(new MemoryStream(Properties.Resources.screenshot)) });
 
             this.settings = File.Exists(settingsFile) ? LoadSettings() : new AppSettings();
             this.FormBorderStyle = FormBorderStyle.None;

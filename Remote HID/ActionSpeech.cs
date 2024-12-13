@@ -30,9 +30,7 @@ namespace Remote_HID
 
             Grammar grammar = new Grammar(gb);
             recognizer.LoadGrammar(grammar);
-
             recognizer.SpeechRecognized += Recognizer_SpeechRecognized;
-            
         }
 
         private void Recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)

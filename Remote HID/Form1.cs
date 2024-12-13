@@ -11,6 +11,14 @@ namespace Remote_HID
         public int row = 0;
     }
 
+    public class Act_item
+    {
+        public string name = "";
+        public string cmd = "";
+        public string func = "open_program";
+        public Image icon;
+    }
+
     public partial class Form1 : Form
     {
         private NotifyIcon notifyIcon;
@@ -23,6 +31,9 @@ namespace Remote_HID
         private ActionSpeech actSpeech;
         private string settingsFile = "setting.json";
         AppSettings settings;
+
+        private IList<Act_item> actItems;
+
         string[,] actions = new string[,]
         {
             { "Shut down", "Restart", "Sleep", "Powershell", "Computer" },
@@ -97,6 +108,11 @@ namespace Remote_HID
 
         public Form1()
         {
+            this.actItems = new List<Act_item>();
+
+            this.actItems.Add(new Act_item { name = "Shut down", cmd= "shutdown /s /f /t 0", icon= Image.FromStream(new MemoryStream(Properties.Resources.power_off)) });
+            this.actItems.Add(new Act_item { name = "Restart", cmd = "shutdown /r /f /t 0", icon = Image.FromStream(new MemoryStream(Properties.Resources.reset)) });
+
             this.settings = File.Exists(settingsFile) ? LoadSettings() : new AppSettings();
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
@@ -294,7 +310,7 @@ namespace Remote_HID
             if (this.settings.row == 2 && this.settings.col == 2)
             {
                 this.Hide();
-                this.actSys.OpenUrl("https://mail.google.com/");
+                this.actSys.OpenProgram("https://mail.google.com/");
             }
 
             if (this.settings.row == 2 && this.settings.col == 3)
@@ -349,7 +365,7 @@ namespace Remote_HID
             if (this.settings.row == 4 && this.settings.col == 2)
             {
                 this.On_hide();
-                this.actSys.OpenUrl("https://translate.google.com/?sl=vi&tl=en&op=translate");
+                this.actSys.OpenProgram("https://translate.google.com/?sl=vi&tl=en&op=translate");
             }
 
             if (this.settings.row == 4 && this.settings.col == 3)
@@ -361,7 +377,7 @@ namespace Remote_HID
             if (this.settings.row == 4 && this.settings.col == 4)
             {
                 this.On_hide();
-                this.actSys.OpenUrl(@"https://maps.google.com/");
+                this.actSys.OpenProgram(@"https://maps.google.com/");
             }
 
             if (this.settings.row == 5 && this.settings.col == 0)
@@ -391,19 +407,19 @@ namespace Remote_HID
             if (this.settings.row == 5 && this.settings.col == 4)
             {
                 this.On_hide();
-                this.actSys.OpenUrl(@"https://www.google.com/");
+                this.actSys.OpenProgram(@"https://www.google.com/");
             }
 
             if (this.settings.row == 6 && this.settings.col == 0)
             {
                 this.On_hide();
-                this.actSys.OpenUrl(@"https://chatgpt.com/");
+                this.actSys.OpenProgram(@"https://chatgpt.com/");
             }
 
             if (this.settings.row == 6 && this.settings.col == 1)
             {
                 this.On_hide();
-                this.actSys.OpenUrl(@"https://github.com/kurotsmile");
+                this.actSys.OpenProgram(@"https://github.com/kurotsmile");
             }
 
             if (this.settings.row == 6 && this.settings.col == 2)

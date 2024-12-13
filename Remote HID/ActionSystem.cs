@@ -75,15 +75,6 @@ namespace Remote_HID
             }
         }
 
-        public void OpenUrl(string url)
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = url,
-                UseShellExecute = true
-            });
-        }
-
         public void OpenProjectMenu()
         {
             keybd_event(0x5B, 0, 0, 0);

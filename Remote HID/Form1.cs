@@ -47,49 +47,41 @@ namespace Remote_HID
             this.actItems.Add(new Act_item { name = "Sleep", cmd = "rundll32.exe powrprof.dll,SetSuspendState Sleep", icon = Image.FromStream(new MemoryStream(Properties.Resources.sleep))});
             this.actItems.Add(new Act_item { name = "Powershell", cmd = "powershell.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.powershell))});
             this.actItems.Add(new Act_item { name = "Computer", cmd = "explorer.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.computer))});
-
             this.actItems.Add(new Act_item { name = "Start", cmd = "^{ESC}",func="sendkey", icon = Image.FromStream(new MemoryStream(Properties.Resources.start_menu))});
             this.actItems.Add(new Act_item { name = "Multitasking",func = "OpenTaskView", icon = Image.FromStream(new MemoryStream(Properties.Resources.apps))});
             this.actItems.Add(new Act_item { name = "Setting", cmd = "ms-settings:", icon = Image.FromStream(new MemoryStream(Properties.Resources.setting))});
             this.actItems.Add(new Act_item { name = "Game", cmd = @"J:\PCSX2\pcsx2-qt.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.game))});
             this.actItems.Add(new Act_item { name = "Youtube", cmd = "https://www.youtube.com", icon = Image.FromStream(new MemoryStream(Properties.Resources.youtube))});
-
             this.actItems.Add(new Act_item { name = "Screen", func = "OpenProjectMenu", icon = Image.FromStream(new MemoryStream(Properties.Resources.display))});
             this.actItems.Add(new Act_item { name = "Notification", func = "OpenActionCenter", icon = Image.FromStream(new MemoryStream(Properties.Resources.notification))});
             this.actItems.Add(new Act_item { name = "Email", cmd = "https://mail.google.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.email))});
             this.actItems.Add(new Act_item { name = "Wifi", cmd = "ms-settings:network-wifi", icon = Image.FromStream(new MemoryStream(Properties.Resources.router))});
             this.actItems.Add(new Act_item { name = "Bluetooth", cmd = "settings:bluetooth", icon = Image.FromStream(new MemoryStream(Properties.Resources.bluetooth))});
-
             this.actItems.Add(new Act_item { name = "Keyboard", cmd = "osk.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.keyboard))});
             this.actItems.Add(new Act_item { name = "Command", cmd = "ms-settings:microphone", icon = Image.FromStream(new MemoryStream(Properties.Resources.mic_on))});
             this.actItems.Add(new Act_item { name = "Mission", cmd = @"J:\Rewards_mission\start.bat", icon = Image.FromStream(new MemoryStream(Properties.Resources.rank))});
             this.actItems.Add(new Act_item { name = "Unity", cmd = @"D:\Unity3d\Unity Hub\Unity Hub.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.unity))});
             this.actItems.Add(new Act_item { name = "Device", cmd = "devmgmt.msc", icon = Image.FromStream(new MemoryStream(Properties.Resources.devices))});
-
             this.actItems.Add(new Act_item { name = "Note", cmd = @"C:\Windows\System32\notepad.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.notes))});
             this.actItems.Add(new Act_item { name = "Calculator", cmd = "calc", icon = Image.FromStream(new MemoryStream(Properties.Resources.calc))});
             this.actItems.Add(new Act_item { name = "Translate", cmd = "https://translate.google.com/?sl=vi&tl=en&op=translate", icon = Image.FromStream(new MemoryStream(Properties.Resources.translate))});
             this.actItems.Add(new Act_item { name = "Devloper", cmd = "code", icon = Image.FromStream(new MemoryStream(Properties.Resources.programming))});
             this.actItems.Add(new Act_item { name = "Location", cmd = "https://maps.google.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.location))});
-
             this.actItems.Add(new Act_item { name = "Design", cmd = @"J:\Program Files\a\RWPaint.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.image_editing))});
             this.actItems.Add(new Act_item { name = "Sound", cmd = "ms-settings:sound", icon = Image.FromStream(new MemoryStream(Properties.Resources.speaker))});
             this.actItems.Add(new Act_item { name = "Art", cmd = @"E:\Paint Tool SAI 2.0\sai2.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.art))});
             this.actItems.Add(new Act_item { name = "Recording", cmd = @"J:\obs-studio\bin\64bit\obs64.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.recording))});
             this.actItems.Add(new Act_item { name = "Browser", cmd = "https://www.google.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.website))});
-
             this.actItems.Add(new Act_item { name = "Chat", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.freelancer))});
             this.actItems.Add(new Act_item { name = "Github", cmd = "https://github.com/kurotsmile", icon = Image.FromStream(new MemoryStream(Properties.Resources.github))});
             this.actItems.Add(new Act_item { name = "Camera", cmd = "microsoft.windows.camera:", icon = Image.FromStream(new MemoryStream(Properties.Resources.camera))});
             this.actItems.Add(new Act_item { name = "Webcam", cmd = @"J:\Imou_en\bin\Imou_en.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.webcam))});
             this.actItems.Add(new Act_item { name = "Store", cmd = "ms-windows-store:", icon = Image.FromStream(new MemoryStream(Properties.Resources.store))});
-
             this.actItems.Add(new Act_item { name = "Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.bookshelf))});
             this.actItems.Add(new Act_item { name = "Write Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.reading_book))});
             this.actItems.Add(new Act_item { name = "Document", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.document))});
             this.actItems.Add(new Act_item { name = "Amazon Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.amazon_book))});
             this.actItems.Add(new Act_item { name = "Store Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.store_book))});
-
             this.actItems.Add(new Act_item { name = "Play", func = "PlayPauseMedia", state = 1, icon = Image.FromStream(new MemoryStream(Properties.Resources.play))});
             this.actItems.Add(new Act_item { name = "Previous", func= "PreviousMedia", state=1, icon = Image.FromStream(new MemoryStream(Properties.Resources.previous))});
             this.actItems.Add(new Act_item { name = "Next", func = "NextMedia", state = 1, icon = Image.FromStream(new MemoryStream(Properties.Resources.next))});
@@ -99,6 +91,14 @@ namespace Remote_HID
             this.actItems.Add(new Act_item { name = "Infomation", cmd = "msinfo32", icon = Image.FromStream(new MemoryStream(Properties.Resources.info))});
             this.actItems.Add(new Act_item { name = "Uninstall", cmd = "ms-settings:appsfeatures", icon = Image.FromStream(new MemoryStream(Properties.Resources.uninstall))});
             this.actItems.Add(new Act_item { name = "Mouse", cmd = "main.cpl", icon = Image.FromStream(new MemoryStream(Properties.Resources.mouse))});
+            this.actItems.Add(new Act_item { name = "Service", cmd = "services.msc", icon = Image.FromStream(new MemoryStream(Properties.Resources.service))});
+            this.actItems.Add(new Act_item { name = "Update", cmd = "ms-settings:windowsupdate", icon = Image.FromStream(new MemoryStream(Properties.Resources.update))});
+            this.actItems.Add(new Act_item { name = "Firewall", cmd = "wf.msc", icon = Image.FromStream(new MemoryStream(Properties.Resources.firewall))});
+            this.actItems.Add(new Act_item { name = "web", cmd = "msedge", icon = Image.FromStream(new MemoryStream(Properties.Resources.international))});
+            this.actItems.Add(new Act_item { name = "Clear", cmd = "cleanmgr", icon = Image.FromStream(new MemoryStream(Properties.Resources.clear))});
+            this.actItems.Add(new Act_item { name = "Disk", cmd = "diskmgmt.msc", icon = Image.FromStream(new MemoryStream(Properties.Resources.ssd))});
+            this.actItems.Add(new Act_item { name = "Font", cmd = "control fonts", icon = Image.FromStream(new MemoryStream(Properties.Resources.font))});
+            this.actItems.Add(new Act_item { name = "Zoom", cmd = "magnify", icon = Image.FromStream(new MemoryStream(Properties.Resources.zoom))});
 
             this.settings = File.Exists(settingsFile) ? LoadSettings() : new AppSettings();
             this.FormBorderStyle = FormBorderStyle.None;

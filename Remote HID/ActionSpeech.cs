@@ -36,10 +36,10 @@ namespace Remote_HID
         private void Recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             this.frm.get_Btn_speech().Text = e.Result.Text;
-            if (e.Result.Text == "setting") this.frm.act_sys().OpenSettings();
             if (e.Result.Text == "exit") this.frm.Hide();
             if (e.Result.Text == "close") this.frm.Hide();
             if (e.Result.Text == "open") this.frm.Show();
+            this.frm.Act_by_keyword(e.Result.Text.ToLower());
         }
 
         public void Start()

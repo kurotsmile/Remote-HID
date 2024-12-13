@@ -12,33 +12,6 @@ namespace Remote_HID
         private const uint KEYEVENTF_KEYUP = 0x0002;
         private const byte VK_A = 0x41;
 
-        public void OpenSettings()
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "ms-settings:",
-                UseShellExecute = true
-            });
-        }
-
-        public void OpenSettingWifi()
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "ms-settings:network-wifi",
-                UseShellExecute = true
-            });
-        }
-
-        public void OpenSettingBluetooth()
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "settings:bluetooth",
-                UseShellExecute = true
-            });
-        }
-
         public void OpenTaskView()
         {
             keybd_event(VK_LWIN, 0, 0, 0);
@@ -83,7 +56,6 @@ namespace Remote_HID
             keybd_event(0x5B, 0, 2, 0);
             keybd_event(0x50, 0, 2, 0);
         }
-
 
         public void OpenActionCenter()
         {

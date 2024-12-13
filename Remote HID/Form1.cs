@@ -16,6 +16,8 @@ namespace Remote_HID
         public string name = "";
         public string cmd = "";
         public string func = "open_program";
+        public int col = 0;
+        public int row = 0;
         public Image icon;
     }
 
@@ -25,6 +27,7 @@ namespace Remote_HID
         private ContextMenuStrip contextMenuStrip;
 
         private Button[,] buttons;
+        private Button btn_voice;
         private GlobalKeyHook hook;
 
         private ActionSystem actSys;
@@ -34,84 +37,57 @@ namespace Remote_HID
 
         private IList<Act_item> actItems;
 
-        string[,] actions = new string[,]
-        {
-            { "Shut down", "Restart", "Sleep", "Powershell", "Computer" },
-            { "Start", "Multitasking", "Setting", "Game", "Youtube" },
-            { "Screen", "Notification", "Email", "Wifi", "Bluetooth" },
-            { "Keyboard", "Voice Command", "Mission", "Unity", "Device" },
-            { "Notepad", "Calculator", "Translate", "Devloper", "Location" },
-            { "Design", "Sound", "Art", "Recording", "Browser" },
-            { "Chat", "Github", "Camera", "Webcam", "Store" },
-            { "Book", "Write Book", "Document", "Amazon Book", "Store Book" }
-        };
-
-        Image[,] icons = new Image[,]
-        {
-            {
-                Image.FromStream(new MemoryStream(Properties.Resources.power_off)),
-                Image.FromStream(new MemoryStream(Properties.Resources.reset)),
-                Image.FromStream(new MemoryStream(Properties.Resources.sleep)),
-                Image.FromStream(new MemoryStream(Properties.Resources.powershell)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer))
-            },
-            {
-                Image.FromStream(new MemoryStream(Properties.Resources.start_menu)),
-                Image.FromStream(new MemoryStream(Properties.Resources.apps)),
-                Image.FromStream(new MemoryStream(Properties.Resources.setting)),
-                Image.FromStream(new MemoryStream(Properties.Resources.game)),
-                Image.FromStream(new MemoryStream(Properties.Resources.youtube))
-            },
-            {
-                Image.FromStream(new MemoryStream(Properties.Resources.display)),
-                Image.FromStream(new MemoryStream(Properties.Resources.notification)),
-                Image.FromStream(new MemoryStream(Properties.Resources.email)),
-                Image.FromStream(new MemoryStream(Properties.Resources.router)),
-                Image.FromStream(new MemoryStream(Properties.Resources.bluetooth))
-            },
-            {
-                Image.FromStream(new MemoryStream(Properties.Resources.keyboard)),
-                Image.FromStream(new MemoryStream(Properties.Resources.mic_on)),
-                Image.FromStream(new MemoryStream(Properties.Resources.rank)),
-                Image.FromStream(new MemoryStream(Properties.Resources.unity)),
-                Image.FromStream(new MemoryStream(Properties.Resources.devices))
-            },
-            {
-                Image.FromStream(new MemoryStream(Properties.Resources.notes)),
-                Image.FromStream(new MemoryStream(Properties.Resources.calc)),
-                Image.FromStream(new MemoryStream(Properties.Resources.translate)),
-                Image.FromStream(new MemoryStream(Properties.Resources.programming)),
-                Image.FromStream(new MemoryStream(Properties.Resources.location))
-            },
-            {
-                Image.FromStream(new MemoryStream(Properties.Resources.image_editing)),
-                Image.FromStream(new MemoryStream(Properties.Resources.speaker)),
-                Image.FromStream(new MemoryStream(Properties.Resources.art)),
-                Image.FromStream(new MemoryStream(Properties.Resources.recording)),
-                Image.FromStream(new MemoryStream(Properties.Resources.website))
-            },
-            {
-                Image.FromStream(new MemoryStream(Properties.Resources.freelancer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.github)),
-                Image.FromStream(new MemoryStream(Properties.Resources.camera)),
-                Image.FromStream(new MemoryStream(Properties.Resources.webcam)),
-                Image.FromStream(new MemoryStream(Properties.Resources.store))
-            },
-            {
-                Image.FromStream(new MemoryStream(Properties.Resources.bookshelf)),
-                Image.FromStream(new MemoryStream(Properties.Resources.reading_book)),
-                Image.FromStream(new MemoryStream(Properties.Resources.document)),
-                Image.FromStream(new MemoryStream(Properties.Resources.amazon_book)),
-                Image.FromStream(new MemoryStream(Properties.Resources.store_book))
-            }
-        };
-
         public Form1()
         {
             this.actItems = new List<Act_item>();
 
-            this.actItems.Add(new Act_item { name = "Shut down", cmd= "shutdown /s /f /t 0", icon= Image.FromStream(new MemoryStream(Properties.Resources.power_off)) });
-            this.actItems.Add(new Act_item { name = "Restart", cmd = "shutdown /r /f /t 0", icon = Image.FromStream(new MemoryStream(Properties.Resources.reset)) });
+            this.actItems.Add(new Act_item { name = "Shut down", cmd= "shutdown /s /f /t 0", icon= Image.FromStream(new MemoryStream(Properties.Resources.power_off))});
+            this.actItems.Add(new Act_item { name = "Restart", cmd = "shutdown /r /f /t 0", icon = Image.FromStream(new MemoryStream(Properties.Resources.reset))});
+            this.actItems.Add(new Act_item { name = "Sleep", cmd = "rundll32.exe powrprof.dll,SetSuspendState Sleep", icon = Image.FromStream(new MemoryStream(Properties.Resources.sleep))});
+            this.actItems.Add(new Act_item { name = "Powershell", cmd = "powershell.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.powershell))});
+            this.actItems.Add(new Act_item { name = "Computer", cmd = "explorer.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.computer))});
+
+            this.actItems.Add(new Act_item { name = "Start", cmd = "^{ESC}",func="sendkey", icon = Image.FromStream(new MemoryStream(Properties.Resources.start_menu))});
+            this.actItems.Add(new Act_item { name = "Multitasking",func = "OpenTaskView", icon = Image.FromStream(new MemoryStream(Properties.Resources.apps))});
+            this.actItems.Add(new Act_item { name = "Setting", cmd = "ms-settings:", icon = Image.FromStream(new MemoryStream(Properties.Resources.setting))});
+            this.actItems.Add(new Act_item { name = "Game", cmd = @"J:\PCSX2\pcsx2-qt.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.game))});
+            this.actItems.Add(new Act_item { name = "Youtube", cmd = "https://www.youtube.com", icon = Image.FromStream(new MemoryStream(Properties.Resources.youtube))});
+
+            this.actItems.Add(new Act_item { name = "Screen", func = "OpenProjectMenu", icon = Image.FromStream(new MemoryStream(Properties.Resources.display))});
+            this.actItems.Add(new Act_item { name = "Notification", func = "OpenActionCenter", icon = Image.FromStream(new MemoryStream(Properties.Resources.notification))});
+            this.actItems.Add(new Act_item { name = "Email", cmd = "https://mail.google.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.email))});
+            this.actItems.Add(new Act_item { name = "Wifi", cmd = "ms-settings:network-wifi", icon = Image.FromStream(new MemoryStream(Properties.Resources.router))});
+            this.actItems.Add(new Act_item { name = "Bluetooth", cmd = "settings:bluetooth", icon = Image.FromStream(new MemoryStream(Properties.Resources.bluetooth))});
+
+            this.actItems.Add(new Act_item { name = "Keyboard", cmd = "osk.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.keyboard))});
+            this.actItems.Add(new Act_item { name = "Command", cmd = "ms-settings:microphone", icon = Image.FromStream(new MemoryStream(Properties.Resources.mic_on))});
+            this.actItems.Add(new Act_item { name = "Mission", cmd = @"J:\Rewards_mission\start.bat", icon = Image.FromStream(new MemoryStream(Properties.Resources.rank))});
+            this.actItems.Add(new Act_item { name = "Unity", cmd = @"D:\Unity3d\Unity Hub\Unity Hub.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.unity))});
+            this.actItems.Add(new Act_item { name = "Device", cmd = "devmgmt.msc", icon = Image.FromStream(new MemoryStream(Properties.Resources.devices))});
+
+            this.actItems.Add(new Act_item { name = "Notepad", cmd = @"C:\Windows\System32\notepad.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.notes))});
+            this.actItems.Add(new Act_item { name = "Calculator", cmd = "calc", icon = Image.FromStream(new MemoryStream(Properties.Resources.calc))});
+            this.actItems.Add(new Act_item { name = "Translate", cmd = "https://translate.google.com/?sl=vi&tl=en&op=translate", icon = Image.FromStream(new MemoryStream(Properties.Resources.translate))});
+            this.actItems.Add(new Act_item { name = "Devloper", cmd = @"C:\Users\trant\AppData\Local\Programs\Microsoft VS Code\Code.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.programming))});
+            this.actItems.Add(new Act_item { name = "Location", cmd = "https://maps.google.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.location))});
+
+            this.actItems.Add(new Act_item { name = "Design", cmd = @"J:\Program Files\a\RWPaint.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.image_editing))});
+            this.actItems.Add(new Act_item { name = "Sound", cmd = "ms-settings:sound", icon = Image.FromStream(new MemoryStream(Properties.Resources.speaker)) });
+            this.actItems.Add(new Act_item { name = "Art", cmd = @"E:\Paint Tool SAI 2.0\sai2.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.art))});
+            this.actItems.Add(new Act_item { name = "Recording", cmd = @"J:\obs-studio\bin\64bit\obs64.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.recording)) });
+            this.actItems.Add(new Act_item { name = "Browser", cmd = "https://www.google.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.website))});
+
+            this.actItems.Add(new Act_item { name = "Chat", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.freelancer))});
+            this.actItems.Add(new Act_item { name = "Github", cmd = "https://github.com/kurotsmile", icon = Image.FromStream(new MemoryStream(Properties.Resources.github))});
+            this.actItems.Add(new Act_item { name = "Camera", cmd = "microsoft.windows.camera:", icon = Image.FromStream(new MemoryStream(Properties.Resources.camera))});
+            this.actItems.Add(new Act_item { name = "Webcam", cmd = @"J:\Imou_en\bin\Imou_en.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.webcam))});
+            this.actItems.Add(new Act_item { name = "Store", cmd = "ms-windows-store:", icon = Image.FromStream(new MemoryStream(Properties.Resources.store))});
+
+            this.actItems.Add(new Act_item { name = "Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.bookshelf)) });
+            this.actItems.Add(new Act_item { name = "Write Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.reading_book)) });
+            this.actItems.Add(new Act_item { name = "Document", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.document)) });
+            this.actItems.Add(new Act_item { name = "Amazon Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.amazon_book)) });
+            this.actItems.Add(new Act_item { name = "Store Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.store_book)) });
 
             this.settings = File.Exists(settingsFile) ? LoadSettings() : new AppSettings();
             this.FormBorderStyle = FormBorderStyle.None;
@@ -137,7 +113,7 @@ namespace Remote_HID
             this.KeyPreview = false;
             this.Load += (s, e) => { this.Hide(); };
             this.actSpeech = new ActionSpeech();
-            InitializeGrid(8, 5);
+            InitializeGrid(8, 8);
             this.StartPosition = FormStartPosition.CenterScreen;
             GlobalKeyHook hook = new GlobalKeyHook();
             hook.Start(this);
@@ -182,36 +158,50 @@ namespace Remote_HID
             buttons = new Button[rows, cols];
             IList<string> list_cmd=new List<string>();
 
+            int count_btn_act = 0;
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
+                    Act_item act_data = null;
+                    if (count_btn_act<this.actItems.Count)
+                    {
+                        act_data = this.actItems[count_btn_act];
+                        act_data.row= i;
+                        act_data.col = j;
+                        list_cmd.Add(act_data.name.ToLower());
+
+                        
+                    }
+                    else
+                    {
+                        act_data = new Act_item();
+                    }
+
                     Button btn = new Button
                     {
-                        Text = actions[i, j],
+                        Text = act_data.name,
                         Dock = DockStyle.Fill,
                         BackColor = Color.Blue,
                         Font = new Font("Segoe UI", 15, FontStyle.Regular),
                         Tag = new Point(i, j),
                         FlatStyle = FlatStyle.Flat,
-                        ForeColor = Color.Black,
-                        Padding = new Padding(0),
-                        Margin = new Padding(0)
+                        ForeColor = Color.Black
                     };
-                    list_cmd.Add(actions[i, j].ToLower());
+                    if (act_data.name == "Command") this.btn_voice = btn;
                     btn.FlatAppearance.BorderSize = 0;
-                    btn.Image = icons[i, j];
-                    btn.ImageAlign = ContentAlignment.TopCenter;
+                    btn.Image = act_data.icon;
+                    btn.ImageAlign = ContentAlignment.MiddleCenter;
                     btn.TextAlign = ContentAlignment.MiddleCenter;
                     btn.TextImageRelation = TextImageRelation.ImageAboveText;
                     buttons[i, j] = btn;
                     table.Controls.Add(btn, j, i);
+                    count_btn_act++;
                 }
             }
             HighlightButton(this.settings.row, this.settings.col);
             this.Controls.Add(table);
             this.actSpeech.InitializeSpeechRecognition(this,list_cmd);
-            this.actSpeech.Start();
         }
 
         private void HighlightButton(int row, int col)
@@ -225,7 +215,6 @@ namespace Remote_HID
             buttons[row, col].BackColor = Color.SkyBlue;
             buttons[row, col].ForeColor = Color.AliceBlue;
         }
-
 
         public void Move_menu(Keys k)
         {
@@ -254,192 +243,7 @@ namespace Remote_HID
 
         public void Act_Menu()
         {
-            if (this.settings.row == 0 && this.settings.col == 0) Process.Start("shutdown", "/s /f /t 0");
-            if (this.settings.row == 0 && this.settings.col == 1) Process.Start("shutdown", "/r /f /t 0");
-            if (this.settings.row == 0 && this.settings.col == 2) Process.Start("rundll32.exe", "powrprof.dll,SetSuspendState Sleep");
-            if (this.settings.row == 0 && this.settings.col == 3) Process.Start("powershell.exe");
-            if (this.settings.row == 0 && this.settings.col == 4)
-            {
-                this.Hide();
-                Process.Start("explorer.exe", "shell:MyComputerFolder");
-            }
-
-            if (this.settings.row == 1 && this.settings.col == 0)
-            {
-                this.Hide();
-                SendKeys.SendWait("^{ESC}");
-            }
-
-            if (this.settings.row == 1 && this.settings.col == 1)
-            {
-                this.Hide();
-                this.actSys.OpenTaskView();
-            }
-
-            if (this.settings.row == 1 && this.settings.col == 2)
-            {
-                this.Hide();
-                this.actSys.OpenSettings();
-            }
-
-            if (this.settings.row == 1 && this.settings.col == 3)
-            {
-                this.Hide();
-                this.actSys.OpenProgram(@"J:\PCSX2\pcsx2-qt.exe");
-            }
-
-            if (this.settings.row == 1 && this.settings.col == 4)
-            {
-                this.Hide();
-                this.actSys.OpenProgram("https://www.youtube.com/");
-            }
-
-            if (this.settings.row == 2 && this.settings.col == 0)
-            {
-                this.Hide();
-                this.actSys.OpenProjectMenu();
-            }
-
-            if (this.settings.row == 2 && this.settings.col == 1)
-            {
-
-                this.Hide();
-                this.actSys.OpenActionCenter();
-            }
-
-            if (this.settings.row == 2 && this.settings.col == 2)
-            {
-                this.Hide();
-                this.actSys.OpenProgram("https://mail.google.com/");
-            }
-
-            if (this.settings.row == 2 && this.settings.col == 3)
-            {
-                this.Hide();
-                this.actSys.OpenSettingWifi();
-            }
-
-            if (this.settings.row == 2 && this.settings.col == 4)
-            {
-                this.Hide();
-                this.actSys.OpenSettingBluetooth();
-            }
-
-            if (this.settings.row == 3 && this.settings.col == 0)
-            {
-                this.Hide();
-                this.actSys.OpenOnScreenKeyboard();
-            }
-
-
-            if (this.settings.row == 3 && this.settings.col == 2)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"J:\Rewards_mission\start.bat");
-            }
-
-            if (this.settings.row == 3 && this.settings.col == 3)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"D:\Unity3d\Unity Hub\Unity Hub.exe");
-            }
-
-            if (this.settings.row == 3 && this.settings.col == 4)
-            {
-                this.On_hide();
-                this.actSys.OpenDeviceManager();
-            }
-
-            if (this.settings.row == 4 && this.settings.col == 0)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"C:\Windows\System32\notepad.exe");
-            }
-
-            if (this.settings.row == 4 && this.settings.col == 1)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"calc");
-            }
-
-            if (this.settings.row == 4 && this.settings.col == 2)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram("https://translate.google.com/?sl=vi&tl=en&op=translate");
-            }
-
-            if (this.settings.row == 4 && this.settings.col == 3)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"C:\Users\trant\AppData\Local\Programs\Microsoft VS Code\Code.exe");
-            }
-
-            if (this.settings.row == 4 && this.settings.col == 4)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"https://maps.google.com/");
-            }
-
-            if (this.settings.row == 5 && this.settings.col == 0)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"J:\Program Files\a\RWPaint.exe");
-            } 
-
-            if (this.settings.row == 5 && this.settings.col == 1)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"ms-settings:sound");
-            }
-
-            if (this.settings.row == 5 && this.settings.col == 2)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"E:\Paint Tool SAI 2.0\sai2.exe");
-            }
-
-            if (this.settings.row == 5 && this.settings.col == 3)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"J:\obs-studio\bin\64bit\obs64.exe");
-            }
-
-            if (this.settings.row == 5 && this.settings.col == 4)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"https://www.google.com/");
-            }
-
-            if (this.settings.row == 6 && this.settings.col == 0)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"https://chatgpt.com/");
-            }
-
-            if (this.settings.row == 6 && this.settings.col == 1)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"https://github.com/kurotsmile");
-            }
-
-            if (this.settings.row == 6 && this.settings.col == 2)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"microsoft.windows.camera:");
-            }
-
-            if (this.settings.row == 6 && this.settings.col == 3)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"J:\Imou_en\bin\Imou_en.exe");
-            }
-
-            if (this.settings.row == 6 && this.settings.col == 4)
-            {
-                this.On_hide();
-                this.actSys.OpenProgram(@"ms-windows-store:");
-            }
-
+            this.Act_by_Position(this.settings.row,this.settings.col);
             this.PlaySound(Properties.Resources.enterMenu);
         }
 
@@ -456,7 +260,7 @@ namespace Remote_HID
 
         public Button get_Btn_speech()
         {
-            return buttons[3, 1];
+            return btn_voice;
         }
 
         public ActionSystem act_sys()
@@ -486,6 +290,40 @@ namespace Remote_HID
         {
             this.Hide();
             this.actSpeech.Pause();
+        }
+
+        public void Act_by_Position(int row,int col)
+        {
+            for(int i = 0; i < actItems.Count; i++)
+            {
+                if(actItems[i].row == row && actItems[i].col == col) this.RunCmd(actItems[i]);
+            }
+        }
+
+        public void Act_by_keyword(string keyword)
+        {
+            for (int i = 0; i < actItems.Count; i++)
+            {
+                if (actItems[i].name.ToLower()==keyword) this.RunCmd(actItems[i]);
+            }
+            this.PlaySound(Properties.Resources.enterMenu);
+        }
+
+        public void RunCmd(Act_item act_data)
+        {
+            if (act_data != null)
+            {
+                if (act_data.func == "OpenTaskView")
+                    this.actSys.OpenTaskView();
+                else if (act_data.func == "OpenProjectMenu")
+                    this.actSys.OpenProjectMenu();
+                else if (act_data.func == "OpenActionCenter")
+                    this.actSys.OpenActionCenter();
+                else if (act_data.func == "sendkey")
+                    SendKeys.SendWait(act_data.cmd);
+                else
+                    this.actSys.OpenProgram(act_data.cmd);
+            }
         }
     }
 }

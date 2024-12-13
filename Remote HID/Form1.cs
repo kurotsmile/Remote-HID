@@ -1,5 +1,4 @@
 ﻿
-using System.Diagnostics;
 using System.Media;
 using Newtonsoft.Json;
 
@@ -77,11 +76,11 @@ namespace Remote_HID
             this.actItems.Add(new Act_item { name = "Camera", cmd = "microsoft.windows.camera:", icon = Image.FromStream(new MemoryStream(Properties.Resources.camera))});
             this.actItems.Add(new Act_item { name = "Webcam", cmd = @"J:\Imou_en\bin\Imou_en.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.webcam))});
             this.actItems.Add(new Act_item { name = "Store", cmd = "ms-windows-store:", icon = Image.FromStream(new MemoryStream(Properties.Resources.store))});
-            this.actItems.Add(new Act_item { name = "Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.bookshelf))});
-            this.actItems.Add(new Act_item { name = "Write Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.reading_book))});
-            this.actItems.Add(new Act_item { name = "Document", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.document))});
-            this.actItems.Add(new Act_item { name = "Amazon Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.amazon_book))});
-            this.actItems.Add(new Act_item { name = "Store Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.store_book))});
+            this.actItems.Add(new Act_item { name = "Book", cmd = @"G:\Ebook", icon = Image.FromStream(new MemoryStream(Properties.Resources.bookshelf))});
+            this.actItems.Add(new Act_item { name = "Write Book", cmd = @"G:\Kindle Create\Kindle Create.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.reading_book))});
+            this.actItems.Add(new Act_item { name = "Document", cmd = "https://drive.google.com/drive/u/2/folders/1xcifsnQF-bQGystpkjphrRUlWFPPhkMw", icon = Image.FromStream(new MemoryStream(Properties.Resources.document))});
+            this.actItems.Add(new Act_item { name = "Amazon Book", cmd = "https://kdp.amazon.com/en_US/bookshelf", icon = Image.FromStream(new MemoryStream(Properties.Resources.amazon_book))});
+            this.actItems.Add(new Act_item { name = "Store Book", cmd = "https://www.amazon.com/s?i=digital-text&rh=p_27%3AThien+Thanh+Tran", icon = Image.FromStream(new MemoryStream(Properties.Resources.store_book))});
             this.actItems.Add(new Act_item { name = "Play", func = "PlayPauseMedia", state = 1, icon = Image.FromStream(new MemoryStream(Properties.Resources.play))});
             this.actItems.Add(new Act_item { name = "Previous", func= "PreviousMedia", state=1, icon = Image.FromStream(new MemoryStream(Properties.Resources.previous))});
             this.actItems.Add(new Act_item { name = "Next", func = "NextMedia", state = 1, icon = Image.FromStream(new MemoryStream(Properties.Resources.next))});

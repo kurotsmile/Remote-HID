@@ -63,6 +63,25 @@ namespace Remote_HID
             }
         }
 
+        public void OpenProgramCMD(string programPath)
+        {
+            if (System.IO.File.Exists(programPath))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = $"/c \"{programPath}\"",
+                    Verb = "runas",
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                });
+            }
+            else
+            {
+                MessageBox.Show("File không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public void OpenUrl(string url)
         {
             Process.Start(new ProcessStartInfo
@@ -100,6 +119,23 @@ namespace Remote_HID
             catch (Exception ex)
             {
                 MessageBox.Show("Không thể mở bàn phím ảo: " + ex.Message);
+            }
+        }
+
+        public void OpenDeviceManager()
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "devmgmt.msc", 
+                    UseShellExecute = true,
+                    Verb = "runas"
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Không thể mở Device Manager: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

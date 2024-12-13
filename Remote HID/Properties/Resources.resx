@@ -187,4 +187,19 @@
   <data name="mic_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mic_off.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="rank" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rank.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="unity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\unity.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="devices" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flashdisk.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="document" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="calc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\advisor.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

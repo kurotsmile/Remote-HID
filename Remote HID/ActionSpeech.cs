@@ -8,12 +8,13 @@ namespace Remote_HID
     internal class ActionSpeech
     {
         private SpeechRecognitionEngine recognizer;
+        private bool isPaused = false;
         private Form1 frm;
+
         public void InitializeSpeechRecognition(Form1 f)
         {
             this.frm = f;
             recognizer = new SpeechRecognitionEngine();
-            recognizer.SetInputToDefaultAudioDevice();
             Choices commands = new Choices();
             commands.Add("open");
             commands.Add("close");
@@ -29,7 +30,7 @@ namespace Remote_HID
             recognizer.LoadGrammar(grammar);
 
             recognizer.SpeechRecognized += Recognizer_SpeechRecognized;
-            recognizer.RecognizeAsync(RecognizeMode.Multiple);
+            
         }
 
         private void Recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -41,9 +42,47 @@ namespace Remote_HID
             if (e.Result.Text == "open") this.frm.Show();
         }
 
+        public void Start()
+        {
+            try
+            {
+                if (!isPaused)
+                {
+                    recognizer.SetInputToDefaultAudioDevice();
+                    recognizer.RecognizeAsync(RecognizeMode.Multiple);
+                }
+                else
+                {
+                    recognizer.RecognizeAsync(RecognizeMode.Multiple);
+                    isPaused = false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public void Pause()
+        {
+            try
+            {
+                if (!isPaused)
+                {
+                    recognizer.RecognizeAsyncStop();
+                    isPaused = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}");
+            }
+        }
+
         public void Stop()
         {
-            recognizer.Dispose();
+            recognizer.RecognizeAsyncStop();
+            isPaused = false;
         }
     }
 }

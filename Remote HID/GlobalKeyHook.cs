@@ -48,14 +48,14 @@ namespace Remote_HID
                     if (frm.Visible)
                     {
                         frm.PlaySound(Properties.Resources.boxClose);
-                        frm.Hide();
+                        frm.On_hide();
                     }
                     else
                     {
                         frm.PlaySound(Properties.Resources.boxOpen);
-                        frm.Show();
+                        frm.On_Show();
                     }
-                    return (IntPtr)0;
+                    return (IntPtr)1;
                 }
 
                 if (frm.Visible)
@@ -66,8 +66,10 @@ namespace Remote_HID
                     if ((Keys)vkCode == Keys.Right) frm.Move_menu(Keys.Right);
                     if ((Keys)vkCode == Keys.Up) frm.Move_menu(Keys.Up);
                     if ((Keys)vkCode == Keys.Down) frm.Move_menu(Keys.Down);
+                    return (IntPtr)0;
                 }
             }
+            
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
         }
 

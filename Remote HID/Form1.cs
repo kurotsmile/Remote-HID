@@ -9,6 +9,7 @@ namespace Remote_HID
         public int col = 0;
         public int row = 0;
         public int sound = 1;
+        public int voice_command = 1;
     }
 
     public class Act_item
@@ -32,7 +33,7 @@ namespace Remote_HID
         
 
         private ActionSystem actSys;
-        private ActionSpeech actSpeech;
+        public ActionSpeech actSpeech;
         private string settingsFile = "setting.json";
         public AppSettings settings;
 
@@ -58,7 +59,7 @@ namespace Remote_HID
             this.actItems.Add(new Act_item { name = "Wifi", cmd = "ms-settings:network-wifi", icon = Image.FromStream(new MemoryStream(Properties.Resources.router))});
             this.actItems.Add(new Act_item { name = "Bluetooth", cmd = "settings:bluetooth", icon = Image.FromStream(new MemoryStream(Properties.Resources.bluetooth))});
             this.actItems.Add(new Act_item { name = "Keyboard", cmd = "osk.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.keyboard))});
-            this.actItems.Add(new Act_item { name = "Command", cmd = "ms-settings:microphone", icon = Image.FromStream(new MemoryStream(Properties.Resources.mic_on))});
+            this.actItems.Add(new Act_item { name = "Command", func = "Change_status_voice_command",state=1, icon = Image.FromStream(new MemoryStream(Properties.Resources.mic_on))});
             this.actItems.Add(new Act_item { name = "Mission", cmd = @"J:\Rewards_mission\start.bat", icon = Image.FromStream(new MemoryStream(Properties.Resources.rank))});
             this.actItems.Add(new Act_item { name = "Unity", cmd = @"D:\Unity3d\Unity Hub\Unity Hub.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.unity))});
             this.actItems.Add(new Act_item { name = "Device", cmd = "devmgmt.msc", icon = Image.FromStream(new MemoryStream(Properties.Resources.devices))});
@@ -122,10 +123,11 @@ namespace Remote_HID
             this.KeyPreview = false;
             this.Load += (s, e) => { this.Hide(); };
             this.actSpeech = new ActionSpeech();
-            InitializeGrid(8, 8);
+            InitializeGrid(8, 10);
             this.StartPosition = FormStartPosition.CenterScreen;
-            GlobalKeyHook hook = new GlobalKeyHook();
-            hook.Start(this);
+            GlobalKeyHook hook = new GlobalKeyHook(this);
+            hook.Start();
+            //this.FormClosed += (s, e) => hook.Dispose();
             this.actSys = new ActionSystem(this);
             this.notify = new NotifyApp(this);
         }
@@ -179,8 +181,6 @@ namespace Remote_HID
                         act_data.row= i;
                         act_data.col = j;
                         list_cmd.Add(act_data.name.ToLower());
-
-                        
                     }
                     else
                     {
@@ -197,12 +197,28 @@ namespace Remote_HID
                         FlatStyle = FlatStyle.Flat,
                         ForeColor = Color.Black
                     };
-                    if (act_data.name == "Command") this.btn_voice = btn;
+                    if (act_data.name == "Command")
+                    {
+                        this.btn_voice = btn;
+                        this.Check_status_voice_command();
+                    }
+                    else
+                    {
+                        btn.Image = act_data.icon;
+                    }
                     btn.FlatAppearance.BorderSize = 0;
-                    btn.Image = act_data.icon;
+                    btn.FlatAppearance.BorderColor = Color.White;
+                    btn.FlatAppearance.MouseOverBackColor = Color.White;
+                    btn.FlatAppearance.MouseDownBackColor = Color.White;
+                    btn.Cursor = Cursors.Hand;
                     btn.ImageAlign = ContentAlignment.MiddleCenter;
                     btn.TextAlign = ContentAlignment.MiddleCenter;
                     btn.TextImageRelation = TextImageRelation.ImageAboveText;
+                    btn.Click += (sender, e) =>
+                    {
+                        this.PlaySound(Properties.Resources.enterMenu);
+                        this.RunCmd(act_data);
+                    };
                     buttons[i, j] = btn;
                     table.Controls.Add(btn, j, i);
                     count_btn_act++;
@@ -217,8 +233,8 @@ namespace Remote_HID
         {
             foreach (var btn in buttons)
             {
-                btn.BackColor = Color.Black;
-                btn.ForeColor = Color.FromArgb(60, 30, 40);
+                btn.BackColor = Color.FromArgb(00, 30, 40, 20);
+                btn.ForeColor = Color.FromArgb(60, 30, 40,20);
                 btn.FlatAppearance.BorderSize = 0;
             }
             buttons[row, col].BackColor = Color.SkyBlue;
@@ -300,7 +316,8 @@ namespace Remote_HID
         public void On_Show()
         {
             this.Show();
-            this.actSpeech.Start();
+            if(this.settings.voice_command==1) this.actSpeech.Start();
+            this.Focus();
         }
 
         public void On_hide()
@@ -346,6 +363,8 @@ namespace Remote_HID
                     this.actSys.FastRewindMedia();
                 else if (act_data.func == "PlayPauseMedia")
                     this.actSys.PlayPauseMedia();
+                else if (act_data.func == "Change_status_voice_command")
+                    this.Change_status_voice_command();
                 else if (act_data.func == "sendkey")
                     SendKeys.SendWait(act_data.cmd);
                 else
@@ -353,6 +372,30 @@ namespace Remote_HID
 
                 if (act_data.state == 0) this.On_hide();
             }
+        }
+
+        public void Check_status_voice_command()
+        {
+            if (this.settings.voice_command == 0)
+                this.btn_voice.Image = Image.FromStream(new MemoryStream(Properties.Resources.mic_off));
+            else
+                this.btn_voice.Image = Image.FromStream(new MemoryStream(Properties.Resources.mic_on));
+        }
+
+        public void Change_status_voice_command()
+        {
+            if (this.settings.voice_command == 0)
+            {
+                this.settings.voice_command = 1;
+            }
+            else
+            {
+                this.settings.voice_command = 0;
+                this.actSpeech.Pause();
+            }
+            this.SaveSettings();
+            this.notify.Update_Menu();
+            this.Check_status_voice_command();
         }
     }
 }

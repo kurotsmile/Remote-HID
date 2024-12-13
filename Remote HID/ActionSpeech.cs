@@ -5,7 +5,7 @@ using System.Speech.Recognition;
 
 namespace Remote_HID
 {
-    internal class ActionSpeech
+    public class ActionSpeech
     {
         private SpeechRecognitionEngine recognizer;
         private bool isPaused = false;

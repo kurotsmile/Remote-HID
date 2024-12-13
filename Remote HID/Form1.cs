@@ -19,6 +19,7 @@ namespace Remote_HID
         public int col = 0;
         public int row = 0;
         public Image icon;
+        public int state = 0;
     }
 
     public partial class Form1 : Form
@@ -65,16 +66,16 @@ namespace Remote_HID
             this.actItems.Add(new Act_item { name = "Unity", cmd = @"D:\Unity3d\Unity Hub\Unity Hub.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.unity))});
             this.actItems.Add(new Act_item { name = "Device", cmd = "devmgmt.msc", icon = Image.FromStream(new MemoryStream(Properties.Resources.devices))});
 
-            this.actItems.Add(new Act_item { name = "Notepad", cmd = @"C:\Windows\System32\notepad.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.notes))});
+            this.actItems.Add(new Act_item { name = "Note", cmd = @"C:\Windows\System32\notepad.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.notes))});
             this.actItems.Add(new Act_item { name = "Calculator", cmd = "calc", icon = Image.FromStream(new MemoryStream(Properties.Resources.calc))});
             this.actItems.Add(new Act_item { name = "Translate", cmd = "https://translate.google.com/?sl=vi&tl=en&op=translate", icon = Image.FromStream(new MemoryStream(Properties.Resources.translate))});
-            this.actItems.Add(new Act_item { name = "Devloper", cmd = @"C:\Users\trant\AppData\Local\Programs\Microsoft VS Code\Code.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.programming))});
+            this.actItems.Add(new Act_item { name = "Devloper", cmd = "code", icon = Image.FromStream(new MemoryStream(Properties.Resources.programming))});
             this.actItems.Add(new Act_item { name = "Location", cmd = "https://maps.google.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.location))});
 
             this.actItems.Add(new Act_item { name = "Design", cmd = @"J:\Program Files\a\RWPaint.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.image_editing))});
-            this.actItems.Add(new Act_item { name = "Sound", cmd = "ms-settings:sound", icon = Image.FromStream(new MemoryStream(Properties.Resources.speaker)) });
+            this.actItems.Add(new Act_item { name = "Sound", cmd = "ms-settings:sound", icon = Image.FromStream(new MemoryStream(Properties.Resources.speaker))});
             this.actItems.Add(new Act_item { name = "Art", cmd = @"E:\Paint Tool SAI 2.0\sai2.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.art))});
-            this.actItems.Add(new Act_item { name = "Recording", cmd = @"J:\obs-studio\bin\64bit\obs64.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.recording)) });
+            this.actItems.Add(new Act_item { name = "Recording", cmd = @"J:\obs-studio\bin\64bit\obs64.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.recording))});
             this.actItems.Add(new Act_item { name = "Browser", cmd = "https://www.google.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.website))});
 
             this.actItems.Add(new Act_item { name = "Chat", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.freelancer))});
@@ -83,11 +84,21 @@ namespace Remote_HID
             this.actItems.Add(new Act_item { name = "Webcam", cmd = @"J:\Imou_en\bin\Imou_en.exe", icon = Image.FromStream(new MemoryStream(Properties.Resources.webcam))});
             this.actItems.Add(new Act_item { name = "Store", cmd = "ms-windows-store:", icon = Image.FromStream(new MemoryStream(Properties.Resources.store))});
 
-            this.actItems.Add(new Act_item { name = "Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.bookshelf)) });
-            this.actItems.Add(new Act_item { name = "Write Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.reading_book)) });
-            this.actItems.Add(new Act_item { name = "Document", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.document)) });
-            this.actItems.Add(new Act_item { name = "Amazon Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.amazon_book)) });
-            this.actItems.Add(new Act_item { name = "Store Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.store_book)) });
+            this.actItems.Add(new Act_item { name = "Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.bookshelf))});
+            this.actItems.Add(new Act_item { name = "Write Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.reading_book))});
+            this.actItems.Add(new Act_item { name = "Document", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.document))});
+            this.actItems.Add(new Act_item { name = "Amazon Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.amazon_book))});
+            this.actItems.Add(new Act_item { name = "Store Book", cmd = "https://chatgpt.com/", icon = Image.FromStream(new MemoryStream(Properties.Resources.store_book))});
+
+            this.actItems.Add(new Act_item { name = "Play", func = "PlayPauseMedia", state = 1, icon = Image.FromStream(new MemoryStream(Properties.Resources.play))});
+            this.actItems.Add(new Act_item { name = "Previous", func= "PreviousMedia", state=1, icon = Image.FromStream(new MemoryStream(Properties.Resources.previous))});
+            this.actItems.Add(new Act_item { name = "Next", func = "NextMedia", state = 1, icon = Image.FromStream(new MemoryStream(Properties.Resources.next))});
+            this.actItems.Add(new Act_item { name = "Fast backward", func = "FastRewindMedia", state = 1, icon = Image.FromStream(new MemoryStream(Properties.Resources.fast_backward))});
+            this.actItems.Add(new Act_item { name = "Fast forward", func = "FastForwardMedia", state = 1, icon = Image.FromStream(new MemoryStream(Properties.Resources.fast_forward))});
+            this.actItems.Add(new Act_item { name = "Task Manager", cmd = "taskmgr", icon = Image.FromStream(new MemoryStream(Properties.Resources.task_manager))});
+            this.actItems.Add(new Act_item { name = "Infomation", cmd = "msinfo32", icon = Image.FromStream(new MemoryStream(Properties.Resources.info))});
+            this.actItems.Add(new Act_item { name = "Uninstall", cmd = "ms-settings:appsfeatures", icon = Image.FromStream(new MemoryStream(Properties.Resources.uninstall))});
+            this.actItems.Add(new Act_item { name = "Mouse", cmd = "main.cpl", icon = Image.FromStream(new MemoryStream(Properties.Resources.mouse))});
 
             this.settings = File.Exists(settingsFile) ? LoadSettings() : new AppSettings();
             this.FormBorderStyle = FormBorderStyle.None;
@@ -95,6 +106,7 @@ namespace Remote_HID
 
             this.BackColor = Color.Black;
             this.TransparencyKey = this.BackColor;
+            this.TopMost = true;
 
             notifyIcon = new NotifyIcon();
             notifyIcon.Visible = true;
@@ -117,8 +129,7 @@ namespace Remote_HID
             this.StartPosition = FormStartPosition.CenterScreen;
             GlobalKeyHook hook = new GlobalKeyHook();
             hook.Start(this);
-            this.actSys = new ActionSystem();
-            
+            this.actSys = new ActionSystem(this);
         }
 
         private void ShowWindow(object sender, EventArgs e)
@@ -319,10 +330,22 @@ namespace Remote_HID
                     this.actSys.OpenProjectMenu();
                 else if (act_data.func == "OpenActionCenter")
                     this.actSys.OpenActionCenter();
+                else if (act_data.func == "NextMedia")
+                    this.actSys.NextMedia();
+                else if (act_data.func == "PreviousMedia")
+                    this.actSys.PreviousMedia();
+                else if (act_data.func == "FastForwardMedia")
+                    this.actSys.FastForwardMedia();
+                else if (act_data.func == "FastRewindMedia")
+                    this.actSys.FastRewindMedia();
+                else if (act_data.func == "PlayPauseMedia")
+                    this.actSys.PlayPauseMedia();
                 else if (act_data.func == "sendkey")
                     SendKeys.SendWait(act_data.cmd);
                 else
                     this.actSys.OpenProgram(act_data.cmd);
+
+                if (act_data.state == 0) this.On_hide();
             }
         }
     }

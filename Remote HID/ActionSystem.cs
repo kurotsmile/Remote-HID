@@ -7,10 +7,20 @@ namespace Remote_HID
         [DllImport("user32.dll")]
         private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
         private const byte VK_LWIN = 0x5B;
         private const byte VK_TAB = 0x09;
         private const uint KEYEVENTF_KEYUP = 0x0002;
         private const byte VK_A = 0x41;
+
+        private Form1 frm;
+
+        public ActionSystem(Form1 f)
+        {
+            this.frm= f;
+        }
 
         public void OpenTaskView()
         {
@@ -94,5 +104,41 @@ namespace Remote_HID
                 MessageBox.Show($"Không thể mở Device Manager: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public void NextMedia()
+        {
+            const int APPCOMMAND_MEDIA_NEXTTRACK = 0xB0000;
+            const int WM_APPCOMMAND = 0x0319;
+            SendMessage(this.frm.Handle, WM_APPCOMMAND, this.frm.Handle, (IntPtr)APPCOMMAND_MEDIA_NEXTTRACK);
+        }
+
+        public void PreviousMedia()
+        {
+            const int APPCOMMAND_MEDIA_PREVIOUSTRACK = 0xC0000;
+            const int WM_APPCOMMAND = 0x0319;
+            SendMessage(this.frm.Handle, WM_APPCOMMAND, this.frm.Handle, (IntPtr)APPCOMMAND_MEDIA_PREVIOUSTRACK);
+        }
+
+        public void FastForwardMedia()
+        {
+            const byte VK_MEDIA_FORWARD = 0xB0;
+            keybd_event(VK_MEDIA_FORWARD, 0, 0,0);
+            keybd_event(VK_MEDIA_FORWARD, 0, KEYEVENTF_KEYUP, 0);
+        }
+
+        public void FastRewindMedia()
+        {
+            const byte VK_MEDIA_FAST_REWIND = 0xB4;
+            keybd_event(VK_MEDIA_FAST_REWIND, 0, 0, 0);
+            keybd_event(VK_MEDIA_FAST_REWIND, 0, KEYEVENTF_KEYUP,0);
+        }
+
+        public void PlayPauseMedia()
+        {
+            const byte VK_MEDIA_PLAY_PAUSE = 0xB3;
+            keybd_event(VK_MEDIA_PLAY_PAUSE, 0, 0, 0);
+            keybd_event(VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_KEYUP, 0);
+        }
+
     }
 }

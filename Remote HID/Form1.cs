@@ -29,10 +29,10 @@ namespace Remote_HID
                 { "Start Menu", "Trình Đa nhiệm", "Cài đặt", "Game PS2", "Youtube" },
                 { "Màn hình", "Thông báo", "Outlook Email", "Kết nối", "Bluetooth" },
                 { "Bàn phím ảo", "Khẩu lệnh", "Nhiệm vụ", "Unity", "Device" },
-                { "Notepad", "Máy tính", "Cài đặt hệ thống", "Quản lý người dùng", "Đăng nhập" },
-                { "Chạy ứng dụng", "Hẹn giờ", "Tải xuống", "Ghi chú", "Mở thư mục" },
-                { "Chạy ứng dụng", "Hẹn giờ", "Tải xuống", "Ghi chú", "Mở thư mục" },
-                { "Chạy ứng dụng", "Hẹn giờ", "Tải xuống", "Ghi chú", "Mở thư mục" }
+                { "Notepad", "Máy tính", "Translate", "Devloper", "Location" },
+                { "Design", "Sound", "Art", "Recording", "Browser" },
+                { "Chat", "Github", "Camera", "Webcam", "Store" },
+                { "Book", "Write Book", "Document", "Amazon Book", "Store Book" }
         };
 
         Image[,] icons = new Image[,]
@@ -66,32 +66,32 @@ namespace Remote_HID
                 Image.FromStream(new MemoryStream(Properties.Resources.devices))
             },
             {
-                Image.FromStream(new MemoryStream(Properties.Resources.document)),
+                Image.FromStream(new MemoryStream(Properties.Resources.notes)),
                 Image.FromStream(new MemoryStream(Properties.Resources.calc)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer))
+                Image.FromStream(new MemoryStream(Properties.Resources.translate)),
+                Image.FromStream(new MemoryStream(Properties.Resources.programming)),
+                Image.FromStream(new MemoryStream(Properties.Resources.location))
             },
             {
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer))
+                Image.FromStream(new MemoryStream(Properties.Resources.image_editing)),
+                Image.FromStream(new MemoryStream(Properties.Resources.speaker)),
+                Image.FromStream(new MemoryStream(Properties.Resources.art)),
+                Image.FromStream(new MemoryStream(Properties.Resources.recording)),
+                Image.FromStream(new MemoryStream(Properties.Resources.website))
             },
             {
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer))
+                Image.FromStream(new MemoryStream(Properties.Resources.freelancer)),
+                Image.FromStream(new MemoryStream(Properties.Resources.github)),
+                Image.FromStream(new MemoryStream(Properties.Resources.camera)),
+                Image.FromStream(new MemoryStream(Properties.Resources.webcam)),
+                Image.FromStream(new MemoryStream(Properties.Resources.store))
             },
             {
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer)),
-                Image.FromStream(new MemoryStream(Properties.Resources.computer))
+                Image.FromStream(new MemoryStream(Properties.Resources.bookshelf)),
+                Image.FromStream(new MemoryStream(Properties.Resources.reading_book)),
+                Image.FromStream(new MemoryStream(Properties.Resources.document)),
+                Image.FromStream(new MemoryStream(Properties.Resources.amazon_book)),
+                Image.FromStream(new MemoryStream(Properties.Resources.store_book))
             }
         };
 
@@ -345,10 +345,86 @@ namespace Remote_HID
                 this.actSys.OpenProgram(@"calc");
             }
 
+            if (this.settings.row == 4 && this.settings.col == 2)
+            {
+                this.On_hide();
+                this.actSys.OpenUrl("https://translate.google.com/?sl=vi&tl=en&op=translate");
+            }
+
+            if (this.settings.row == 4 && this.settings.col == 3)
+            {
+                this.On_hide();
+                this.actSys.OpenProgram(@"C:\Users\trant\AppData\Local\Programs\Microsoft VS Code\Code.exe");
+            }
+
+            if (this.settings.row == 4 && this.settings.col == 4)
+            {
+                this.On_hide();
+                this.actSys.OpenUrl(@"https://maps.google.com/");
+            }
+
+            if (this.settings.row == 5 && this.settings.col == 0)
+            {
+                this.On_hide();
+                this.actSys.OpenProgram(@"J:\Program Files\a\RWPaint.exe");
+            } 
+
+            if (this.settings.row == 5 && this.settings.col == 1)
+            {
+                this.On_hide();
+                this.actSys.OpenProgram(@"ms-settings:sound");
+            }
+
+            if (this.settings.row == 5 && this.settings.col == 2)
+            {
+                this.On_hide();
+                this.actSys.OpenProgram(@"E:\Paint Tool SAI 2.0\sai2.exe");
+            }
+
+            if (this.settings.row == 5 && this.settings.col == 3)
+            {
+                this.On_hide();
+                this.actSys.OpenProgram(@"J:\obs-studio\bin\64bit\obs64.exe");
+            }
+
+            if (this.settings.row == 5 && this.settings.col == 4)
+            {
+                this.On_hide();
+                this.actSys.OpenUrl(@"https://www.google.com/");
+            }
+
+            if (this.settings.row == 6 && this.settings.col == 0)
+            {
+                this.On_hide();
+                this.actSys.OpenUrl(@"https://chatgpt.com/");
+            }
+
+            if (this.settings.row == 6 && this.settings.col == 1)
+            {
+                this.On_hide();
+                this.actSys.OpenUrl(@"https://github.com/kurotsmile");
+            }
+
+            if (this.settings.row == 6 && this.settings.col == 2)
+            {
+                this.On_hide();
+                this.actSys.OpenProgram(@"microsoft.windows.camera:");
+            }
+
+            if (this.settings.row == 6 && this.settings.col == 3)
+            {
+                this.On_hide();
+                this.actSys.OpenProgram(@"J:\Imou_en\bin\Imou_en.exe");
+            }
+
+            if (this.settings.row == 6 && this.settings.col == 4)
+            {
+                this.On_hide();
+                this.actSys.OpenProgram(@"ms-windows-store:");
+            }
+
             this.PlaySound(Properties.Resources.enterMenu);
         }
-
-
 
         public void PlaySound(byte[] data_sound)
         {

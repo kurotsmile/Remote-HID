@@ -49,18 +49,11 @@ namespace Remote_HID
 
         public void OpenProgram(string programPath)
         {
-            if (System.IO.File.Exists(programPath))
-            {
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = programPath,
                     UseShellExecute = true
                 });
-            }
-            else
-            {
-                MessageBox.Show("File không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         public void OpenProgramCMD(string programPath)

@@ -63,6 +63,16 @@ namespace Remote_HID.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] amazon_book {
+            get {
+                object obj = ResourceManager.GetObject("amazon_book", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] apps {
             get {
                 object obj = ResourceManager.GetObject("apps", resourceCulture);
@@ -73,9 +83,29 @@ namespace Remote_HID.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] art {
+            get {
+                object obj = ResourceManager.GetObject("art", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] bluetooth {
             get {
                 object obj = ResourceManager.GetObject("bluetooth", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] bookshelf {
+            get {
+                object obj = ResourceManager.GetObject("bookshelf", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -106,6 +136,16 @@ namespace Remote_HID.Properties {
         internal static byte[] calc {
             get {
                 object obj = ResourceManager.GetObject("calc", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] camera {
+            get {
+                object obj = ResourceManager.GetObject("camera", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -173,9 +213,29 @@ namespace Remote_HID.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] freelancer {
+            get {
+                object obj = ResourceManager.GetObject("freelancer", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] game {
             get {
                 object obj = ResourceManager.GetObject("game", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] github {
+            get {
+                object obj = ResourceManager.GetObject("github", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -193,9 +253,29 @@ namespace Remote_HID.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] image_editing {
+            get {
+                object obj = ResourceManager.GetObject("image_editing", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] keyboard {
             get {
                 object obj = ResourceManager.GetObject("keyboard", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] location {
+            get {
+                object obj = ResourceManager.GetObject("location", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -216,6 +296,16 @@ namespace Remote_HID.Properties {
         internal static byte[] mic_on {
             get {
                 object obj = ResourceManager.GetObject("mic_on", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] notes {
+            get {
+                object obj = ResourceManager.GetObject("notes", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -253,9 +343,39 @@ namespace Remote_HID.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] programming {
+            get {
+                object obj = ResourceManager.GetObject("programming", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] rank {
             get {
                 object obj = ResourceManager.GetObject("rank", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] reading_book {
+            get {
+                object obj = ResourceManager.GetObject("reading_book", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] recording {
+            get {
+                object obj = ResourceManager.GetObject("recording", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -313,6 +433,16 @@ namespace Remote_HID.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] speaker {
+            get {
+                object obj = ResourceManager.GetObject("speaker", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] start_menu {
             get {
                 object obj = ResourceManager.GetObject("start_menu", resourceCulture);
@@ -323,9 +453,59 @@ namespace Remote_HID.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] store {
+            get {
+                object obj = ResourceManager.GetObject("store", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] store_book {
+            get {
+                object obj = ResourceManager.GetObject("store_book", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] translate {
+            get {
+                object obj = ResourceManager.GetObject("translate", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] unity {
             get {
                 object obj = ResourceManager.GetObject("unity", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] webcam {
+            get {
+                object obj = ResourceManager.GetObject("webcam", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] website {
+            get {
+                object obj = ResourceManager.GetObject("website", resourceCulture);
                 return ((byte[])(obj));
             }
         }

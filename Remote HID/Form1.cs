@@ -8,6 +8,7 @@ namespace Remote_HID
     {
         public int col = 0;
         public int row = 0;
+        public int sound = 1;
     }
 
     public class Act_item
@@ -23,17 +24,17 @@ namespace Remote_HID
 
     public partial class Form1 : Form
     {
-        private NotifyIcon notifyIcon;
-        private ContextMenuStrip contextMenuStrip;
+        private GlobalKeyHook hook;
+        private NotifyApp notify;
 
         private Button[,] buttons;
         private Button btn_voice;
-        private GlobalKeyHook hook;
+        
 
         private ActionSystem actSys;
         private ActionSpeech actSpeech;
         private string settingsFile = "setting.json";
-        AppSettings settings;
+        public AppSettings settings;
 
         private IList<Act_item> actItems;
 
@@ -114,16 +115,6 @@ namespace Remote_HID
             this.TransparencyKey = this.BackColor;
             this.TopMost = true;
 
-            notifyIcon = new NotifyIcon();
-            notifyIcon.Visible = true;
-            notifyIcon.Text = "App Runging...";
-            notifyIcon.Icon = new Icon(new MemoryStream(Properties.Resources.icon_app));
-
-            contextMenuStrip = new ContextMenuStrip();
-            contextMenuStrip.Items.Add("Hiện cửa sổ", null, ShowWindow);
-            contextMenuStrip.Items.Add("Thoát", null, ExitApp);
-            notifyIcon.ContextMenuStrip = contextMenuStrip;
-
             EffectBlur effectBlur = new EffectBlur();
             effectBlur.EnableBlur(this.Handle);
 
@@ -136,17 +127,18 @@ namespace Remote_HID
             GlobalKeyHook hook = new GlobalKeyHook();
             hook.Start(this);
             this.actSys = new ActionSystem(this);
+            this.notify = new NotifyApp(this);
         }
 
-        private void ShowWindow(object sender, EventArgs e)
+        public void ShowWindow(object sender, EventArgs e)
         {
             this.On_Show();
         }
 
-        private void ExitApp(object sender, EventArgs e)
+        public void ExitApp(object sender, EventArgs e)
         {
             if(hook!=null) hook.Stop();
-            notifyIcon.Visible = false;
+            this.notify.Stop();
             this.actSpeech.Stop();
             Application.Exit();
         }
@@ -266,11 +258,14 @@ namespace Remote_HID
 
         public void PlaySound(byte[] data_sound)
         {
-            using (MemoryStream stream = new MemoryStream(data_sound))
+            if (this.settings.sound == 1)
             {
-                using (SoundPlayer player = new SoundPlayer(stream))
+                using (MemoryStream stream = new MemoryStream(data_sound))
                 {
-                    player.Play();
+                    using (SoundPlayer player = new SoundPlayer(stream))
+                    {
+                        player.Play();
+                    }
                 }
             }
         }
@@ -289,6 +284,11 @@ namespace Remote_HID
         {
             string json = JsonConvert.SerializeObject(settings, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText(settingsFile, json);
+        }
+
+        public void SaveSettings()
+        {
+            this.SaveSettings(this.settings);
         }
 
         AppSettings LoadSettings()

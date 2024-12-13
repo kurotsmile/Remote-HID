@@ -11,17 +11,19 @@ namespace Remote_HID
         private bool isPaused = false;
         private Form1 frm;
 
-        public void InitializeSpeechRecognition(Form1 f)
+        public void InitializeSpeechRecognition(Form1 f, IList<string> list_cmd)
         {
             this.frm = f;
             recognizer = new SpeechRecognitionEngine();
             Choices commands = new Choices();
             commands.Add("open");
             commands.Add("close");
-            commands.Add("setting");
             commands.Add("exit");
-            commands.Add("next");
-            commands.Add("mute");
+
+            for (int i = 0; i < list_cmd.Count; i++)
+            {
+                commands.Add(list_cmd[i]);
+            }
 
             GrammarBuilder gb = new GrammarBuilder();
             gb.Append(commands);

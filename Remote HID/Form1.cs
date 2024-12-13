@@ -25,14 +25,14 @@ namespace Remote_HID
         AppSettings settings;
         string[,] actions = new string[,]
         {
-                { "Tắt máy", "Khởi động lại", "Ngủ", "Powershell", "This Pc" },
-                { "Start Menu", "Trình Đa nhiệm", "Cài đặt", "Game PS2", "Youtube" },
-                { "Màn hình", "Thông báo", "Outlook Email", "Kết nối", "Bluetooth" },
-                { "Bàn phím ảo", "Khẩu lệnh", "Nhiệm vụ", "Unity", "Device" },
-                { "Notepad", "Máy tính", "Translate", "Devloper", "Location" },
-                { "Design", "Sound", "Art", "Recording", "Browser" },
-                { "Chat", "Github", "Camera", "Webcam", "Store" },
-                { "Book", "Write Book", "Document", "Amazon Book", "Store Book" }
+            { "Shut down", "Restart", "Sleep", "Powershell", "Computer" },
+            { "Start", "Multitasking", "Setting", "Game", "Youtube" },
+            { "Screen", "Notification", "Email", "Wifi", "Bluetooth" },
+            { "Keyboard", "Voice Command", "Mission", "Unity", "Device" },
+            { "Notepad", "Calculator", "Translate", "Devloper", "Location" },
+            { "Design", "Sound", "Art", "Recording", "Browser" },
+            { "Chat", "Github", "Camera", "Webcam", "Store" },
+            { "Book", "Write Book", "Document", "Amazon Book", "Store Book" }
         };
 
         Image[,] icons = new Image[,]
@@ -114,21 +114,18 @@ namespace Remote_HID
             contextMenuStrip.Items.Add("Thoát", null, ExitApp);
             notifyIcon.ContextMenuStrip = contextMenuStrip;
 
+            EffectBlur effectBlur = new EffectBlur();
+            effectBlur.EnableBlur(this.Handle);
+
             this.Icon = new Icon(new MemoryStream(Properties.Resources.icon_app));
             this.KeyPreview = false;
             this.Load += (s, e) => { this.Hide(); };
+            this.actSpeech = new ActionSpeech();
             InitializeGrid(8, 5);
             this.StartPosition = FormStartPosition.CenterScreen;
             GlobalKeyHook hook = new GlobalKeyHook();
             hook.Start(this);
             this.actSys = new ActionSystem();
-
-            EffectBlur effectBlur = new EffectBlur();
-            effectBlur.EnableBlur(this.Handle);
-
-            this.actSpeech = new ActionSpeech();
-            this.actSpeech.InitializeSpeechRecognition(this);
-
             
         }
 
@@ -167,6 +164,7 @@ namespace Remote_HID
             for (int j = 0; j < cols; j++) table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f / cols));
 
             buttons = new Button[rows, cols];
+            IList<string> list_cmd=new List<string>();
 
             for (int i = 0; i < rows; i++)
             {
@@ -184,6 +182,7 @@ namespace Remote_HID
                         Padding = new Padding(0),
                         Margin = new Padding(0)
                     };
+                    list_cmd.Add(actions[i, j].ToLower());
                     btn.FlatAppearance.BorderSize = 0;
                     btn.Image = icons[i, j];
                     btn.ImageAlign = ContentAlignment.TopCenter;
@@ -195,6 +194,8 @@ namespace Remote_HID
             }
             HighlightButton(this.settings.row, this.settings.col);
             this.Controls.Add(table);
+            this.actSpeech.InitializeSpeechRecognition(this,list_cmd);
+            this.actSpeech.Start();
         }
 
         private void HighlightButton(int row, int col)
@@ -274,9 +275,8 @@ namespace Remote_HID
             if (this.settings.row == 1 && this.settings.col == 4)
             {
                 this.Hide();
-                this.actSys.OpenUrl("https://www.youtube.com/");
+                this.actSys.OpenProgram("https://www.youtube.com/");
             }
-
 
             if (this.settings.row == 2 && this.settings.col == 0)
             {
@@ -286,6 +286,7 @@ namespace Remote_HID
 
             if (this.settings.row == 2 && this.settings.col == 1)
             {
+
                 this.Hide();
                 this.actSys.OpenActionCenter();
             }

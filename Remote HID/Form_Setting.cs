@@ -28,24 +28,23 @@
                 ImageSize = new Size(16, 16)
             };
 
-            for (int i = 0; i < this.frm.actItems.Count; i++)
+            for (int i = 0; i < this.frm.settings.actItems.Count; i++)
             {
-                Act_item act_data=this.frm.actItems[i];
+                Act_item act_data=this.frm.settings.actItems[i];
                 if (act_data.path_icon=="")
                     imageList.Images.Add(this.frm.list_icon[act_data.index_icon]);
                 else
                     imageList.Images.Add(Image.FromFile(act_data.path_icon));
             }
 
-
             listView1.SmallImageList = imageList;
 
             listView1.Items.Clear();
-            for (int i = 0; i < this.frm.actItems.Count; i++)
+            for (int i = 0; i < this.frm.settings.actItems.Count; i++)
             {
-                ListViewItem item1 = new ListViewItem(this.frm.actItems[i].name, i);
-                item1.SubItems.Add(this.frm.actItems[i].func);
-                item1.SubItems.Add(this.frm.actItems[i].cmd);
+                ListViewItem item1 = new ListViewItem(this.frm.settings.actItems[i].name, i);
+                item1.SubItems.Add(this.frm.settings.actItems[i].func);
+                item1.SubItems.Add(this.frm.settings.actItems[i].cmd);
                 listView1.Items.Add(item1);
             }
         }
@@ -60,9 +59,10 @@
             if (listView1.SelectedItems.Count > 0)
             {
                 int selectedIndex = listView1.SelectedIndices[0];
-                this.frm.actItems.RemoveAt(selectedIndex);
+                this.frm.settings.actItems.RemoveAt(selectedIndex);
                 this.Update_List();
                 this.frm.Update_table();
+                this.frm.SaveSettings();
             }
         }
 

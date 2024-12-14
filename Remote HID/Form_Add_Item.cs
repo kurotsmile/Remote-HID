@@ -24,7 +24,7 @@ namespace Remote_HID
             act_item.func = this.txt_val.Text;
             act_item.path_icon=this.txt_icon_path.Text;
             act_item.index_icon = this.index_sel_icon;
-            this.frm.actItems.Add(act_item);
+            this.frm.settings.actItems.Add(act_item);
             this.frm.Update_table();
             MessageBox.Show("Add item menu success!");
             this.Hide();

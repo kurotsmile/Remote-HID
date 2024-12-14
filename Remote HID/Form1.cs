@@ -12,6 +12,7 @@ namespace Remote_HID
         public int voice_command = 1;
         public int col_length = 8;
         public int row_length = 8;
+        public IList<Act_item> actItems=new List<Act_item>();
     }
 
     public class Act_item
@@ -41,10 +42,11 @@ namespace Remote_HID
         public AppSettings settings;
 
         public IList<Image> list_icon;
-        public IList<Act_item> actItems;
+        
 
         public Form1()
         {
+            this.settings = File.Exists(settingsFile) ? LoadSettings() : new AppSettings();
             this.list_icon=new List<Image>();
             this.list_icon.Add(Image.FromStream(new MemoryStream(Properties.Resources.power_off)));
             this.list_icon.Add(Image.FromStream(new MemoryStream(Properties.Resources.reset)));
@@ -111,74 +113,75 @@ namespace Remote_HID
             this.list_icon.Add(Image.FromStream(new MemoryStream(Properties.Resources.photo)));
             this.list_icon.Add(Image.FromStream(new MemoryStream(Properties.Resources.screenshot)));
 
-            this.actItems = new List<Act_item>();
+            if (this.settings.actItems.Count == 0)
+            {
+                this.settings.actItems = new List<Act_item>();
+                this.settings.actItems.Add(new Act_item { name = "Shut down", cmd= "shutdown /s /f /t 0",index_icon=0});
+                this.settings.actItems.Add(new Act_item { name = "Restart", cmd = "shutdown /r /f /t 0", index_icon=1});
+                this.settings.actItems.Add(new Act_item { name = "Sleep", cmd = "rundll32.exe powrprof.dll,SetSuspendState Sleep", index_icon=2});
+                this.settings.actItems.Add(new Act_item { name = "Powershell", cmd = "powershell.exe",index_icon=3});
+                this.settings.actItems.Add(new Act_item { name = "Computer", cmd = "explorer.exe", index_icon=4});
+                this.settings.actItems.Add(new Act_item { name = "Start", cmd = "^{ESC}",func="sendkey",index_icon=5});
+                this.settings.actItems.Add(new Act_item { name = "Multitasking",func = "OpenTaskView",index_icon=6});
+                this.settings.actItems.Add(new Act_item { name = "Setting", cmd = "ms-settings:", index_icon=7});
+                this.settings.actItems.Add(new Act_item { name = "Game", cmd = @"J:\PCSX2\pcsx2-qt.exe",index_icon=8});
+                this.settings.actItems.Add(new Act_item { name = "Youtube", cmd = "https://www.youtube.com",index_icon=9});
+                this.settings.actItems.Add(new Act_item { name = "Screen", func = "OpenProjectMenu",index_icon=9});
+                this.settings.actItems.Add(new Act_item { name = "Notification", func = "OpenActionCenter", index_icon = 10});
+                this.settings.actItems.Add(new Act_item { name = "Email", cmd = "https://mail.google.com/", index_icon = 11 });
+                this.settings.actItems.Add(new Act_item { name = "Wifi", cmd = "ms-settings:network-wifi", index_icon = 12 });
+                this.settings.actItems.Add(new Act_item { name = "Bluetooth", cmd = "settings:bluetooth", index_icon = 13});
+                this.settings.actItems.Add(new Act_item { name = "Keyboard", cmd = "osk.exe", index_icon =14 });
+                this.settings.actItems.Add(new Act_item { name = "Command", func = "Change_status_voice_command",state=1,index_icon=15});
+                this.settings.actItems.Add(new Act_item { name = "Mission", cmd = @"J:\Rewards_mission\start.bat",index_icon = 16});
+                this.settings.actItems.Add(new Act_item { name = "Unity", cmd = @"D:\Unity3d\Unity Hub\Unity Hub.exe",index_icon = 17});
+                this.settings.actItems.Add(new Act_item { name = "Device", cmd = "devmgmt.msc", index_icon = 18});
+                this.settings.actItems.Add(new Act_item { name = "Note", cmd = @"C:\Windows\System32\notepad.exe", index_icon = 19 });
+                this.settings.actItems.Add(new Act_item { name = "Calculator", cmd = "calc", index_icon = 20 });
+                this.settings.actItems.Add(new Act_item { name = "Translate", cmd = "https://translate.google.com/?sl=vi&tl=en&op=translate",index_icon=21});
+                this.settings.actItems.Add(new Act_item { name = "Devloper", cmd = "code",index_icon=22});
+                this.settings.actItems.Add(new Act_item { name = "Location", cmd = "https://maps.google.com/",index_icon=23});
+                this.settings.actItems.Add(new Act_item { name = "Design", cmd = @"J:\Program Files\a\RWPaint.exe", index_icon=24});
+                this.settings.actItems.Add(new Act_item { name = "Sound", cmd = "ms-settings:sound",index_icon=25});
+                this.settings.actItems.Add(new Act_item { name = "Art", cmd = @"E:\Paint Tool SAI 2.0\sai2.exe",index_icon=26});
+                this.settings.actItems.Add(new Act_item { name = "Recording", cmd = @"J:\obs-studio\bin\64bit\obs64.exe",index_icon=27});
+                this.settings.actItems.Add(new Act_item { name = "Browser", cmd = "https://www.google.com/",index_icon=28});
+                this.settings.actItems.Add(new Act_item { name = "Chat", cmd = "https://chatgpt.com/", index_icon=29});
+                this.settings.actItems.Add(new Act_item { name = "Github", cmd = "https://github.com/kurotsmile", index_icon=30});
+                this.settings.actItems.Add(new Act_item { name = "Camera", cmd = "microsoft.windows.camera:", index_icon=31});
+                this.settings.actItems.Add(new Act_item { name = "Webcam", cmd = @"J:\Imou_en\bin\Imou_en.exe", index_icon=32});
+                this.settings.actItems.Add(new Act_item { name = "Store", cmd = "ms-windows-store:", index_icon=33});
+                this.settings.actItems.Add(new Act_item { name = "Book", cmd = @"G:\Ebook", index_icon=34});
+                this.settings.actItems.Add(new Act_item { name = "Write Book", cmd = @"G:\Kindle Create\Kindle Create.exe", index_icon=35});
+                this.settings.actItems.Add(new Act_item { name = "Document", cmd = "https://drive.google.com/drive/u/2/folders/1xcifsnQF-bQGystpkjphrRUlWFPPhkMw",index_icon=35});
+                this.settings.actItems.Add(new Act_item { name = "Amazon Book", cmd = "https://kdp.amazon.com/en_US/bookshelf", index_icon = 36 });
+                this.settings.actItems.Add(new Act_item { name = "Store Book", cmd = "https://www.amazon.com/s?i=digital-text&rh=p_27%3AThien+Thanh+Tran", index_icon = 37});
+                this.settings.actItems.Add(new Act_item { name = "Play", func = "PlayPauseMedia", state = 1,index_icon=38});
+                this.settings.actItems.Add(new Act_item { name = "Previous", func= "PreviousMedia", state=1,index_icon=39});
+                this.settings.actItems.Add(new Act_item { name = "Next", func = "NextMedia", state = 1,index_icon=40});
+                this.settings.actItems.Add(new Act_item { name = "Fast backward", func = "FastRewindMedia", state = 1,index_icon=41});
+                this.settings.actItems.Add(new Act_item { name = "Fast forward", func = "FastForwardMedia", state = 1,index_icon=42});
+                this.settings.actItems.Add(new Act_item { name = "Task Manager", cmd = "taskmgr", index_icon = 43});
+                this.settings.actItems.Add(new Act_item { name = "Infomation", cmd = "msinfo32", index_icon = 44});
+                this.settings.actItems.Add(new Act_item { name = "Uninstall", cmd = "ms-settings:appsfeatures", index_icon =45});
+                this.settings.actItems.Add(new Act_item { name = "Mouse", cmd = "main.cpl", index_icon =46});
+                this.settings.actItems.Add(new Act_item { name = "Service", cmd = "services.msc", index_icon = 47});
+                this.settings.actItems.Add(new Act_item { name = "Update", cmd = "ms-settings:windowsupdate",index_icon=48});
+                this.settings.actItems.Add(new Act_item { name = "Firewall", cmd = "wf.msc",index_icon=49});
+                this.settings.actItems.Add(new Act_item { name = "web", cmd = "msedge",index_icon=50});
+                this.settings.actItems.Add(new Act_item { name = "Clear", cmd = "cleanmgr",index_icon=51});
+                this.settings.actItems.Add(new Act_item { name = "Disk", cmd = "diskmgmt.msc",index_icon=52});
+                this.settings.actItems.Add(new Act_item { name = "Font", cmd = "control fonts",index_icon=53});
+                this.settings.actItems.Add(new Act_item { name = "Zoom", cmd = "magnify",index_icon=54});
+                this.settings.actItems.Add(new Act_item { name = "Music", cmd = "msmusic:",index_icon=55});
+                this.settings.actItems.Add(new Act_item { name = "Telegram", cmd = "https://web.telegram.org/k/",index_icon=56});
+                this.settings.actItems.Add(new Act_item { name = "Tool", cmd = "notepad++",index_icon=57});
+                this.settings.actItems.Add(new Act_item { name = "Regedit", cmd = "regedit",index_icon=58});
+                this.settings.actItems.Add(new Act_item { name = "cmd", cmd = "cmd", index_icon=59});
+                this.settings.actItems.Add(new Act_item { name = "Photo", cmd = "ms-photos:", index_icon=60});
+                this.settings.actItems.Add(new Act_item { name = "Screenshot", cmd = "snippingtool",index_icon=62});
+            }
 
-            this.actItems.Add(new Act_item { name = "Shut down", cmd= "shutdown /s /f /t 0",index_icon=0});
-            this.actItems.Add(new Act_item { name = "Restart", cmd = "shutdown /r /f /t 0", index_icon=1});
-            this.actItems.Add(new Act_item { name = "Sleep", cmd = "rundll32.exe powrprof.dll,SetSuspendState Sleep", index_icon=2});
-            this.actItems.Add(new Act_item { name = "Powershell", cmd = "powershell.exe",index_icon=3});
-            this.actItems.Add(new Act_item { name = "Computer", cmd = "explorer.exe", index_icon=4});
-            this.actItems.Add(new Act_item { name = "Start", cmd = "^{ESC}",func="sendkey",index_icon=5});
-            this.actItems.Add(new Act_item { name = "Multitasking",func = "OpenTaskView",index_icon=6});
-            this.actItems.Add(new Act_item { name = "Setting", cmd = "ms-settings:", index_icon=7});
-            this.actItems.Add(new Act_item { name = "Game", cmd = @"J:\PCSX2\pcsx2-qt.exe",index_icon=8});
-            this.actItems.Add(new Act_item { name = "Youtube", cmd = "https://www.youtube.com",index_icon=9});
-            this.actItems.Add(new Act_item { name = "Screen", func = "OpenProjectMenu",index_icon=9});
-            this.actItems.Add(new Act_item { name = "Notification", func = "OpenActionCenter", index_icon = 10});
-            this.actItems.Add(new Act_item { name = "Email", cmd = "https://mail.google.com/", index_icon = 11 });
-            this.actItems.Add(new Act_item { name = "Wifi", cmd = "ms-settings:network-wifi", index_icon = 12 });
-            this.actItems.Add(new Act_item { name = "Bluetooth", cmd = "settings:bluetooth", index_icon = 13});
-            this.actItems.Add(new Act_item { name = "Keyboard", cmd = "osk.exe", index_icon =14 });
-            this.actItems.Add(new Act_item { name = "Command", func = "Change_status_voice_command",state=1,index_icon=15});
-            this.actItems.Add(new Act_item { name = "Mission", cmd = @"J:\Rewards_mission\start.bat",index_icon = 16});
-            this.actItems.Add(new Act_item { name = "Unity", cmd = @"D:\Unity3d\Unity Hub\Unity Hub.exe",index_icon = 17});
-            this.actItems.Add(new Act_item { name = "Device", cmd = "devmgmt.msc", index_icon = 18});
-            this.actItems.Add(new Act_item { name = "Note", cmd = @"C:\Windows\System32\notepad.exe", index_icon = 19 });
-            this.actItems.Add(new Act_item { name = "Calculator", cmd = "calc", index_icon = 20 });
-            this.actItems.Add(new Act_item { name = "Translate", cmd = "https://translate.google.com/?sl=vi&tl=en&op=translate",index_icon=21});
-            this.actItems.Add(new Act_item { name = "Devloper", cmd = "code",index_icon=22});
-            this.actItems.Add(new Act_item { name = "Location", cmd = "https://maps.google.com/",index_icon=23});
-            this.actItems.Add(new Act_item { name = "Design", cmd = @"J:\Program Files\a\RWPaint.exe", index_icon=24});
-            this.actItems.Add(new Act_item { name = "Sound", cmd = "ms-settings:sound",index_icon=25});
-            this.actItems.Add(new Act_item { name = "Art", cmd = @"E:\Paint Tool SAI 2.0\sai2.exe",index_icon=26});
-            this.actItems.Add(new Act_item { name = "Recording", cmd = @"J:\obs-studio\bin\64bit\obs64.exe",index_icon=27});
-            this.actItems.Add(new Act_item { name = "Browser", cmd = "https://www.google.com/",index_icon=28});
-            this.actItems.Add(new Act_item { name = "Chat", cmd = "https://chatgpt.com/", index_icon=29});
-            this.actItems.Add(new Act_item { name = "Github", cmd = "https://github.com/kurotsmile", index_icon=30});
-            this.actItems.Add(new Act_item { name = "Camera", cmd = "microsoft.windows.camera:", index_icon=31});
-            this.actItems.Add(new Act_item { name = "Webcam", cmd = @"J:\Imou_en\bin\Imou_en.exe", index_icon=32});
-            this.actItems.Add(new Act_item { name = "Store", cmd = "ms-windows-store:", index_icon=33});
-            this.actItems.Add(new Act_item { name = "Book", cmd = @"G:\Ebook", index_icon=34});
-            this.actItems.Add(new Act_item { name = "Write Book", cmd = @"G:\Kindle Create\Kindle Create.exe", index_icon=35});
-            this.actItems.Add(new Act_item { name = "Document", cmd = "https://drive.google.com/drive/u/2/folders/1xcifsnQF-bQGystpkjphrRUlWFPPhkMw",index_icon=35});
-            this.actItems.Add(new Act_item { name = "Amazon Book", cmd = "https://kdp.amazon.com/en_US/bookshelf", index_icon = 36 });
-            this.actItems.Add(new Act_item { name = "Store Book", cmd = "https://www.amazon.com/s?i=digital-text&rh=p_27%3AThien+Thanh+Tran", index_icon = 37});
-            this.actItems.Add(new Act_item { name = "Play", func = "PlayPauseMedia", state = 1,index_icon=38});
-            this.actItems.Add(new Act_item { name = "Previous", func= "PreviousMedia", state=1,index_icon=39});
-            this.actItems.Add(new Act_item { name = "Next", func = "NextMedia", state = 1,index_icon=40});
-            this.actItems.Add(new Act_item { name = "Fast backward", func = "FastRewindMedia", state = 1,index_icon=41});
-            this.actItems.Add(new Act_item { name = "Fast forward", func = "FastForwardMedia", state = 1,index_icon=42});
-            this.actItems.Add(new Act_item { name = "Task Manager", cmd = "taskmgr", index_icon = 43});
-            this.actItems.Add(new Act_item { name = "Infomation", cmd = "msinfo32", index_icon = 44});
-            this.actItems.Add(new Act_item { name = "Uninstall", cmd = "ms-settings:appsfeatures", index_icon =45});
-            this.actItems.Add(new Act_item { name = "Mouse", cmd = "main.cpl", index_icon =46});
-            this.actItems.Add(new Act_item { name = "Service", cmd = "services.msc", index_icon = 47});
-            this.actItems.Add(new Act_item { name = "Update", cmd = "ms-settings:windowsupdate",index_icon=48});
-            this.actItems.Add(new Act_item { name = "Firewall", cmd = "wf.msc",index_icon=49});
-            this.actItems.Add(new Act_item { name = "web", cmd = "msedge",index_icon=50});
-            this.actItems.Add(new Act_item { name = "Clear", cmd = "cleanmgr",index_icon=51});
-            this.actItems.Add(new Act_item { name = "Disk", cmd = "diskmgmt.msc",index_icon=52});
-            this.actItems.Add(new Act_item { name = "Font", cmd = "control fonts",index_icon=53});
-            this.actItems.Add(new Act_item { name = "Zoom", cmd = "magnify",index_icon=54});
-            this.actItems.Add(new Act_item { name = "Music", cmd = "msmusic:",index_icon=55});
-            this.actItems.Add(new Act_item { name = "Telegram", cmd = "https://web.telegram.org/k/",index_icon=56});
-            this.actItems.Add(new Act_item { name = "Tool", cmd = "notepad++",index_icon=57});
-            this.actItems.Add(new Act_item { name = "Regedit", cmd = "regedit",index_icon=58});
-            this.actItems.Add(new Act_item { name = "cmd", cmd = "cmd", index_icon=59});
-            this.actItems.Add(new Act_item { name = "Photo", cmd = "ms-photos:", index_icon=60});
-            this.actItems.Add(new Act_item { name = "Screenshot", cmd = "snippingtool",index_icon=62});
-
-            this.settings = File.Exists(settingsFile) ? LoadSettings() : new AppSettings();
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
 
@@ -250,9 +253,9 @@ namespace Remote_HID
                 for (int j = 0; j < cols; j++)
                 {
                     Act_item act_data = null;
-                    if (count_btn_act<this.actItems.Count)
+                    if (count_btn_act<this.settings.actItems.Count)
                     {
-                        act_data = this.actItems[count_btn_act];
+                        act_data = this.settings.actItems[count_btn_act];
                         act_data.row= i;
                         act_data.col = j;
                         list_cmd.Add(act_data.name.ToLower());
@@ -407,17 +410,17 @@ namespace Remote_HID
 
         public void Act_by_Position(int row,int col)
         {
-            for(int i = 0; i < actItems.Count; i++)
+            for(int i = 0; i < this.settings.actItems.Count; i++)
             {
-                if(actItems[i].row == row && actItems[i].col == col) this.RunCmd(actItems[i]);
+                if(this.settings.actItems[i].row == row && this.settings.actItems[i].col == col) this.RunCmd(this.settings.actItems[i]);
             }
         }
 
         public void Act_by_keyword(string keyword)
         {
-            for (int i = 0; i < actItems.Count; i++)
+            for (int i = 0; i < this.settings.actItems.Count; i++)
             {
-                if (actItems[i].name.ToLower()==keyword) this.RunCmd(actItems[i]);
+                if (this.settings.actItems[i].name.ToLower()==keyword) this.RunCmd(this.settings.actItems[i]);
             }
             this.PlaySound(Properties.Resources.enterMenu);
         }

@@ -14,7 +14,7 @@
             this.Update_List();
         }
 
-        private void Update_List()
+        public void Update_List()
         {
             listView1.View = View.Details;
             listView1.GridLines = true;
@@ -30,7 +30,11 @@
 
             for (int i = 0; i < this.frm.actItems.Count; i++)
             {
-                imageList.Images.Add(this.frm.list_icon[i]);
+                Act_item act_data=this.frm.actItems[i];
+                if (act_data.path_icon=="")
+                    imageList.Images.Add(this.frm.list_icon[act_data.index_icon]);
+                else
+                    imageList.Images.Add(Image.FromFile(act_data.path_icon));
             }
 
 
@@ -64,7 +68,7 @@
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            Form_Add_Item frm_add = new Form_Add_Item(this.frm);
+            Form_Add_Item frm_add = new Form_Add_Item(this.frm,this);
             frm_add.Show();
         }
     }

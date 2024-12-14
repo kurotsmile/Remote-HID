@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Add_Item));
             btn_done = new Button();
             label_name = new Label();
             txt_name = new TextBox();
@@ -47,6 +48,8 @@
             // 
             // btn_done
             // 
+            btn_done.Image = (Image)resources.GetObject("btn_done.Image");
+            btn_done.ImageAlign = ContentAlignment.MiddleLeft;
             btn_done.Location = new Point(12, 348);
             btn_done.Name = "btn_done";
             btn_done.Size = new Size(368, 45);

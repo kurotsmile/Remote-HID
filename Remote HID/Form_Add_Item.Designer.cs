@@ -35,14 +35,14 @@
             comboBox_func = new ComboBox();
             txt_val = new TextBox();
             label1 = new Label();
-            openFileDialog1 = new OpenFileDialog();
+            openFileDialog_icon = new OpenFileDialog();
             label2 = new Label();
-            textBox1 = new TextBox();
-            button1 = new Button();
+            txt_icon_path = new TextBox();
+            btn_select_file = new Button();
             label3 = new Label();
-            pictureBox1 = new PictureBox();
+            picture_icon_view = new PictureBox();
             button2 = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picture_icon_view).BeginInit();
             SuspendLayout();
             // 
             // btn_done
@@ -106,9 +106,9 @@
             label1.TabIndex = 6;
             label1.Text = "Value";
             // 
-            // openFileDialog1
+            // openFileDialog_icon
             // 
-            openFileDialog1.FileName = "openFileDialog1";
+            openFileDialog_icon.FileName = "openFileDialog";
             // 
             // label2
             // 
@@ -119,21 +119,22 @@
             label2.TabIndex = 7;
             label2.Text = "Icon Path";
             // 
-            // textBox1
+            // txt_icon_path
             // 
-            textBox1.Location = new Point(12, 209);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(299, 23);
-            textBox1.TabIndex = 8;
+            txt_icon_path.Location = new Point(12, 209);
+            txt_icon_path.Name = "txt_icon_path";
+            txt_icon_path.Size = new Size(267, 23);
+            txt_icon_path.TabIndex = 8;
             // 
-            // button1
+            // btn_select_file
             // 
-            button1.Location = new Point(317, 209);
-            button1.Name = "button1";
-            button1.Size = new Size(63, 23);
-            button1.TabIndex = 9;
-            button1.Text = "Done";
-            button1.UseVisualStyleBackColor = true;
+            btn_select_file.Location = new Point(285, 209);
+            btn_select_file.Name = "btn_select_file";
+            btn_select_file.Size = new Size(95, 23);
+            btn_select_file.TabIndex = 9;
+            btn_select_file.Text = "Select File";
+            btn_select_file.UseVisualStyleBackColor = true;
+            btn_select_file.Click += btn_select_file_Click;
             // 
             // label3
             // 
@@ -144,13 +145,13 @@
             label3.TabIndex = 10;
             label3.Text = "Icon Collection";
             // 
-            // pictureBox1
+            // picture_icon_view
             // 
-            pictureBox1.Location = new Point(16, 272);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(70, 70);
-            pictureBox1.TabIndex = 11;
-            pictureBox1.TabStop = false;
+            picture_icon_view.Location = new Point(16, 272);
+            picture_icon_view.Name = "picture_icon_view";
+            picture_icon_view.Size = new Size(70, 70);
+            picture_icon_view.TabIndex = 11;
+            picture_icon_view.TabStop = false;
             // 
             // button2
             // 
@@ -168,10 +169,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(392, 405);
             Controls.Add(button2);
-            Controls.Add(pictureBox1);
+            Controls.Add(picture_icon_view);
             Controls.Add(label3);
-            Controls.Add(button1);
-            Controls.Add(textBox1);
+            Controls.Add(btn_select_file);
+            Controls.Add(txt_icon_path);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(txt_val);
@@ -183,7 +184,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "Form_Add_Item";
             Text = "Add Menu Item";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picture_icon_view).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -197,12 +198,12 @@
         private ComboBox comboBox_func;
         private TextBox txt_val;
         private Label label1;
-        private OpenFileDialog openFileDialog1;
+        private OpenFileDialog openFileDialog_icon;
         private Label label2;
-        private TextBox textBox1;
-        private Button button1;
+        private TextBox txt_icon_path;
+        private Button btn_select_file;
         private Label label3;
-        private PictureBox pictureBox1;
+        private PictureBox picture_icon_view;
         private Button button2;
     }
 }

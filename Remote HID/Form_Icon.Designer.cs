@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listView1 = new ListView();
+            listView_icon = new ListView();
             SuspendLayout();
             // 
-            // listView1
+            // listView_icon
             // 
-            listView1.Location = new Point(12, 12);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(355, 322);
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
+            listView_icon.Location = new Point(12, 12);
+            listView_icon.Name = "listView_icon";
+            listView_icon.Size = new Size(438, 355);
+            listView_icon.TabIndex = 0;
+            listView_icon.UseCompatibleStateImageBehavior = false;
+            listView_icon.SelectedIndexChanged += listView_icon_SelectedIndexChanged;
             // 
             // Form_Icon
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(379, 346);
-            Controls.Add(listView1);
+            ClientSize = new Size(462, 379);
+            Controls.Add(listView_icon);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "Form_Icon";
             Text = "Icon";
@@ -54,6 +55,6 @@
 
         #endregion
 
-        private ListView listView1;
+        private ListView listView_icon;
     }
 }

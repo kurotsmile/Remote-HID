@@ -30,7 +30,7 @@
 
             for (int i = 0; i < this.frm.actItems.Count; i++)
             {
-                imageList.Images.Add(this.frm.actItems[i].icon);
+                imageList.Images.Add(this.frm.list_icon[i]);
             }
 
 
@@ -56,7 +56,6 @@
             if (listView1.SelectedItems.Count > 0)
             {
                 int selectedIndex = listView1.SelectedIndices[0];
-                MessageBox.Show("Select row:" + selectedIndex);
                 this.frm.actItems.RemoveAt(selectedIndex);
                 this.Update_List();
                 this.frm.Update_table();
@@ -65,7 +64,7 @@
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            Form_Add_Item frm_add = new Form_Add_Item();
+            Form_Add_Item frm_add = new Form_Add_Item(this.frm);
             frm_add.Show();
         }
     }

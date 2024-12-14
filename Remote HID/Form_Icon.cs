@@ -1,44 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
+﻿
 namespace Remote_HID
 {
     public partial class Form_Icon : Form
     {
-        public Form_Icon()
+        private Form1 form1;
+        private Form_Add_Item frm_add;
+
+        public Form_Icon(Form1 f,Form_Add_Item frm_add)
         {
+            this.form1 = f;
+            this.frm_add = frm_add;
             InitializeComponent();
         }
 
         private void Form_Icon_Load(object sender, EventArgs e)
         {
-            // Thiết lập ListView
-            listView1.View = View.LargeIcon; // Hiển thị theo dạng biểu tượng lớn
-            listView1.FullRowSelect = true;
+            listView_icon.View = View.LargeIcon;
+            listView_icon.FullRowSelect = true;
 
-            // Tạo ImageList
             ImageList imageList = new ImageList();
-            imageList.ImageSize = new Size(64, 64); // Kích thước hình ảnh
-            listView1.LargeImageList = imageList;
+            imageList.ImageSize = new Size(24, 24);
+            listView_icon.LargeImageList = imageList;
 
-            // Duyệt qua các hình ảnh trong Resources
-            foreach (System.Drawing.Bitmap image in Properties.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.CurrentCulture, true, true))
+            for (int i = 0; i < this.form1.list_icon.Count; i++)
             {
-                // Thêm hình ảnh vào ImageList
-                imageList.Images.Add(image);
+                {
+                    imageList.Images.Add(this.form1.list_icon[i]);
+                    ListViewItem item = new ListViewItem(imageList.Images.Count.ToString());
+                    item.ImageIndex = imageList.Images.Count - 1;
+                    listView_icon.Items.Add(item);
+                }
+            }
+            listView_icon.ItemActivate += listView_ico_ItemActivate;
+        }
 
-                // Thêm mục vào ListView (dựa trên tên hình ảnh)
-                ListViewItem item = new ListViewItem(imageList.Images.Count.ToString());
-                item.ImageIndex = imageList.Images.Count - 1; // Gán chỉ số ảnh
-                listView1.Items.Add(item);
+        private void listView_icon_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView_ico_ItemActivate(object sender, EventArgs e)
+        {
+            if (listView_icon.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listView_icon.SelectedItems[0];
+                this.frm_add.Set_Icon_view_by_index(selectedItem.Index);
+                this.Hide();
             }
         }
     }

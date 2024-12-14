@@ -11,11 +11,6 @@
 
         private void Form_Setting_Load(object sender, EventArgs e)
         {
-            this.Update_List();
-        }
-
-        public void Update_List()
-        {
             listView1.View = View.Details;
             listView1.GridLines = true;
             listView1.FullRowSelect = true;
@@ -23,6 +18,11 @@
             listView1.Columns.Add("Function", 200);
             listView1.Columns.Add("cmd", 200);
 
+            this.Update_List();
+        }
+
+        public void Update_List()
+        {
             ImageList imageList = new ImageList
             {
                 ImageSize = new Size(16, 16)
@@ -32,7 +32,7 @@
             {
                 Act_item act_data=this.frm.settings.actItems[i];
                 if (act_data.path_icon=="")
-                    imageList.Images.Add(this.frm.list_icon[act_data.index_icon]);
+                    if(act_data.index_icon!=-1) imageList.Images.Add(this.frm.list_icon[act_data.index_icon]);
                 else
                     imageList.Images.Add(Image.FromFile(act_data.path_icon));
             }

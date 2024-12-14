@@ -10,7 +10,7 @@ namespace Remote_HID
         private int index_sel_icon;
         public Form_Add_Item(Form1 frm,Form_Setting frm_setting)
         {
-            this.index_sel_icon = 0;
+            this.index_sel_icon = -1;
             InitializeComponent();
             this.frm = frm;
             this.frm_setting = frm_setting;

@@ -33,7 +33,8 @@ namespace Remote_HID
                 contextMenuStrip.Items.Add("Tắt khẩu lệnh", null, Change_status_voice_command);
 
             contextMenuStrip.Items.Add(new ToolStripSeparator());
-            contextMenuStrip.Items.Add("Cài đặt", null, Show_setting);
+            contextMenuStrip.Items.Add("Cài đặt Menu", null, Show_setting);
+            contextMenuStrip.Items.Add("Cài đặt Tabel", null, Show_setting_table);
             contextMenuStrip.Items.Add(new ToolStripSeparator());
 
             contextMenuStrip.Items.Add("Thoát", null, this.form1.ExitApp);
@@ -64,6 +65,12 @@ namespace Remote_HID
         {
             Form_Setting fs = new Form_Setting(this.form1);
             fs.Show();
+        }
+
+        public void Show_setting_table(object sender, EventArgs e)
+        {
+            Form_Setting_Tabel ft = new Form_Setting_Tabel(this.form1);
+            ft.Show();
         }
     }
 }

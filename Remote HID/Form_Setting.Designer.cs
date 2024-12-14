@@ -37,11 +37,14 @@
             // 
             // btn_cancel
             // 
-            btn_cancel.Location = new Point(302, 426);
+            btn_cancel.Image = Properties.Resources.close;
+            btn_cancel.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_cancel.Location = new Point(318, 426);
             btn_cancel.Name = "btn_cancel";
-            btn_cancel.Size = new Size(89, 36);
+            btn_cancel.Size = new Size(73, 36);
             btn_cancel.TabIndex = 0;
             btn_cancel.Text = "Close";
+            btn_cancel.TextAlign = ContentAlignment.MiddleRight;
             btn_cancel.UseVisualStyleBackColor = true;
             btn_cancel.Click += btn_cancel_Click;
             // 
@@ -55,21 +58,27 @@
             // 
             // btn_delete
             // 
-            btn_delete.Location = new Point(107, 426);
+            btn_delete.Image = Properties.Resources.trash;
+            btn_delete.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_delete.Location = new Point(239, 426);
             btn_delete.Name = "btn_delete";
-            btn_delete.Size = new Size(89, 36);
+            btn_delete.Size = new Size(73, 36);
             btn_delete.TabIndex = 2;
             btn_delete.Text = "Delete";
+            btn_delete.TextAlign = ContentAlignment.MiddleRight;
             btn_delete.UseVisualStyleBackColor = true;
             btn_delete.Click += btn_delete_Click;
             // 
             // btn_add
             // 
+            btn_add.Image = Properties.Resources.add;
+            btn_add.ImageAlign = ContentAlignment.MiddleLeft;
             btn_add.Location = new Point(12, 426);
             btn_add.Name = "btn_add";
-            btn_add.Size = new Size(89, 36);
+            btn_add.Size = new Size(91, 36);
             btn_add.TabIndex = 3;
             btn_add.Text = "Add Item";
+            btn_add.TextAlign = ContentAlignment.MiddleRight;
             btn_add.UseVisualStyleBackColor = true;
             btn_add.Click += btn_add_Click;
             // 

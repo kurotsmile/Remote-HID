@@ -1,4 +1,6 @@
-﻿namespace Remote_HID
+﻿using System.Windows.Forms;
+
+namespace Remote_HID
 {
     public class NotifyApp
     {
@@ -30,6 +32,10 @@
             else
                 contextMenuStrip.Items.Add("Tắt khẩu lệnh", null, Change_status_voice_command);
 
+            contextMenuStrip.Items.Add(new ToolStripSeparator());
+            contextMenuStrip.Items.Add("Cài đặt", null, Show_setting);
+            contextMenuStrip.Items.Add(new ToolStripSeparator());
+
             contextMenuStrip.Items.Add("Thoát", null, this.form1.ExitApp);
             notifyIcon.ContextMenuStrip = contextMenuStrip;
         }
@@ -52,6 +58,12 @@
         public void Stop()
         {
             notifyIcon.Visible = false;
+        }
+
+        public void Show_setting(object sender, EventArgs e)
+        {
+            Form_Setting fs = new Form_Setting(this.form1);
+            fs.Show();
         }
     }
 }

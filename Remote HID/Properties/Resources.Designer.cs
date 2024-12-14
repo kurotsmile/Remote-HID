@@ -291,12 +291,12 @@ namespace Remote_HID.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static byte[] gardening {
+        internal static System.Drawing.Bitmap gardening {
             get {
                 object obj = ResourceManager.GetObject("gardening", resourceCulture);
-                return ((byte[])(obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

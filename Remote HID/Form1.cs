@@ -10,6 +10,8 @@ namespace Remote_HID
         public int row = 0;
         public int sound = 1;
         public int voice_command = 1;
+        public int col_length = 8;
+        public int row_length = 8;
     }
 
     public class Act_item
@@ -37,7 +39,7 @@ namespace Remote_HID
         private string settingsFile = "setting.json";
         public AppSettings settings;
 
-        private IList<Act_item> actItems;
+        public IList<Act_item> actItems;
 
         public Form1()
         {
@@ -102,7 +104,7 @@ namespace Remote_HID
             this.actItems.Add(new Act_item { name = "Zoom", cmd = "magnify", icon = Image.FromStream(new MemoryStream(Properties.Resources.zoom))});
             this.actItems.Add(new Act_item { name = "Music", cmd = "msmusic:", icon = Image.FromStream(new MemoryStream(Properties.Resources.music))});
             this.actItems.Add(new Act_item { name = "Telegram", cmd = "https://web.telegram.org/k/", icon = Image.FromStream(new MemoryStream(Properties.Resources.live_chat))});
-            this.actItems.Add(new Act_item { name = "Tool", cmd = "notepad++", icon = Image.FromStream(new MemoryStream(Properties.Resources.gardening))});
+            this.actItems.Add(new Act_item { name = "Tool", cmd = "notepad++", icon = Image.FromStream(new MemoryStream(Properties.Resources.programming))});
             this.actItems.Add(new Act_item { name = "Regedit", cmd = "regedit", icon = Image.FromStream(new MemoryStream(Properties.Resources.register))});
             this.actItems.Add(new Act_item { name = "cmd", cmd = "cmd", icon = Image.FromStream(new MemoryStream(Properties.Resources.cmd))});
             this.actItems.Add(new Act_item { name = "Photo", cmd = "ms-photos:", icon = Image.FromStream(new MemoryStream(Properties.Resources.photo))});
@@ -123,13 +125,18 @@ namespace Remote_HID
             this.KeyPreview = false;
             this.Load += (s, e) => { this.Hide(); };
             this.actSpeech = new ActionSpeech();
-            InitializeGrid(8, 10);
+            this.Update_table();
             this.StartPosition = FormStartPosition.CenterScreen;
             GlobalKeyHook hook = new GlobalKeyHook(this);
             hook.Start();
             //this.FormClosed += (s, e) => hook.Dispose();
             this.actSys = new ActionSystem(this);
             this.notify = new NotifyApp(this);
+        }
+
+        public void Update_table()
+        {
+            this.InitializeGrid(this.settings.row_length, this.settings.col_length);
         }
 
         public void ShowWindow(object sender, EventArgs e)
@@ -225,6 +232,7 @@ namespace Remote_HID
                 }
             }
             HighlightButton(this.settings.row, this.settings.col);
+            this.Controls.Clear();
             this.Controls.Add(table);
             this.actSpeech.InitializeSpeechRecognition(this,list_cmd);
         }

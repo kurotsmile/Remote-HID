@@ -12,6 +12,7 @@ namespace Remote_HID
         public int voice_command = 1;
         public int col_length = 8;
         public int row_length = 8;
+        public string font_family="";
         public IList<Act_item> actItems=new List<Act_item>();
     }
 

@@ -33,11 +33,15 @@
             label2 = new Label();
             txt_row = new TextBox();
             txt_col = new TextBox();
+            label3 = new Label();
+            label_name_font_sel = new Label();
+            btn_sel_font = new Button();
+            fontDialog_label = new FontDialog();
             SuspendLayout();
             // 
             // button_done
             // 
-            button_done.Location = new Point(12, 148);
+            button_done.Location = new Point(12, 245);
             button_done.Name = "button_done";
             button_done.Size = new Size(354, 44);
             button_done.TabIndex = 0;
@@ -77,11 +81,43 @@
             txt_col.Size = new Size(352, 23);
             txt_col.TabIndex = 4;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(14, 139);
+            label3.Name = "label3";
+            label3.Size = new Size(62, 15);
+            label3.TabIndex = 5;
+            label3.Text = "Font Label";
+            // 
+            // label_name_font_sel
+            // 
+            label_name_font_sel.AutoSize = true;
+            label_name_font_sel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_name_font_sel.Location = new Point(14, 167);
+            label_name_font_sel.Name = "label_name_font_sel";
+            label_name_font_sel.Size = new Size(232, 37);
+            label_name_font_sel.TabIndex = 6;
+            label_name_font_sel.Text = "Font Style Preview";
+            // 
+            // btn_sel_font
+            // 
+            btn_sel_font.Location = new Point(274, 144);
+            btn_sel_font.Name = "btn_sel_font";
+            btn_sel_font.Size = new Size(92, 86);
+            btn_sel_font.TabIndex = 7;
+            btn_sel_font.Text = "Select Font";
+            btn_sel_font.UseVisualStyleBackColor = true;
+            btn_sel_font.Click += btn_sel_font_Click;
+            // 
             // Form_Setting_Tabel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(378, 214);
+            ClientSize = new Size(378, 301);
+            Controls.Add(btn_sel_font);
+            Controls.Add(label_name_font_sel);
+            Controls.Add(label3);
             Controls.Add(txt_col);
             Controls.Add(txt_row);
             Controls.Add(label2);
@@ -101,5 +137,9 @@
         private Label label2;
         private TextBox txt_row;
         private TextBox txt_col;
+        private Label label3;
+        private Label label_name_font_sel;
+        private Button btn_sel_font;
+        private FontDialog fontDialog_label;
     }
 }

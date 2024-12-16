@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace Remote_HID
+﻿namespace Remote_HID
 {
     public partial class Form_Add_Item : Form
     {

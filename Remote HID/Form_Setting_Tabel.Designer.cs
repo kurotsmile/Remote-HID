@@ -87,6 +87,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button_done);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "Form_Setting_Tabel";
             Text = "Table Setting";
             ResumeLayout(false);

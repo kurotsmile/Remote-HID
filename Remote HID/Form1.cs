@@ -283,9 +283,15 @@ namespace Remote_HID
                     else
                     {
                         if (act_data.path_icon != "")
-                            btn.Image = Image.FromFile(act_data.path_icon);
+                        {
+                            Image originalImage = Image.FromFile(act_data.path_icon);
+                            Image resizedImage = originalImage.GetThumbnailImage(50, 50, null, IntPtr.Zero);
+                            btn.Image = resizedImage;
+                        }
                         else
-                            if(act_data.index_icon!=-1) btn.Image = this.list_icon[act_data.index_icon];
+                        {
+                            if (act_data.index_icon != -1) btn.Image = this.list_icon[act_data.index_icon];
+                        }
                     }
                     btn.FlatAppearance.BorderSize = 0;
                     btn.FlatAppearance.BorderColor = Color.White;

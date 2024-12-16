@@ -14,9 +14,9 @@
             listView1.View = View.Details;
             listView1.GridLines = true;
             listView1.FullRowSelect = true;
-            listView1.Columns.Add("Name", 150);
-            listView1.Columns.Add("Function", 200);
-            listView1.Columns.Add("cmd", 200);
+            listView1.Columns.Add("Name", 80);
+            listView1.Columns.Add("cmd", 100);
+            listView1.Columns.Add("Function", 60);
 
             this.Update_List();
         }
@@ -43,8 +43,8 @@
             for (int i = 0; i < this.frm.settings.actItems.Count; i++)
             {
                 ListViewItem item1 = new ListViewItem(this.frm.settings.actItems[i].name, i);
-                item1.SubItems.Add(this.frm.settings.actItems[i].func);
                 item1.SubItems.Add(this.frm.settings.actItems[i].cmd);
+                item1.SubItems.Add(this.frm.settings.actItems[i].func);
                 listView1.Items.Add(item1);
             }
         }

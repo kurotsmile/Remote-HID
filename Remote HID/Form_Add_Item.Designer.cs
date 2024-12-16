@@ -42,6 +42,9 @@
             label3 = new Label();
             picture_icon_view = new PictureBox();
             button2 = new Button();
+            btn_select_file_program = new Button();
+            btn_sel_folder = new Button();
+            folderBrowserDialog = new FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)picture_icon_view).BeginInit();
             SuspendLayout();
             // 
@@ -96,7 +99,7 @@
             // 
             txt_val.Location = new Point(12, 148);
             txt_val.Name = "txt_val";
-            txt_val.Size = new Size(368, 23);
+            txt_val.Size = new Size(267, 23);
             txt_val.TabIndex = 5;
             // 
             // label1
@@ -154,6 +157,7 @@
             picture_icon_view.Size = new Size(70, 70);
             picture_icon_view.TabIndex = 11;
             picture_icon_view.TabStop = false;
+            picture_icon_view.Click += picture_icon_view_Click;
             // 
             // button2
             // 
@@ -165,11 +169,33 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // btn_select_file_program
+            // 
+            btn_select_file_program.Location = new Point(333, 148);
+            btn_select_file_program.Name = "btn_select_file_program";
+            btn_select_file_program.Size = new Size(47, 23);
+            btn_select_file_program.TabIndex = 13;
+            btn_select_file_program.Text = "File";
+            btn_select_file_program.UseVisualStyleBackColor = true;
+            btn_select_file_program.Click += btn_select_file_program_Click;
+            // 
+            // btn_sel_folder
+            // 
+            btn_sel_folder.Location = new Point(285, 148);
+            btn_sel_folder.Name = "btn_sel_folder";
+            btn_sel_folder.Size = new Size(47, 23);
+            btn_sel_folder.TabIndex = 14;
+            btn_sel_folder.Text = "Folder";
+            btn_sel_folder.UseVisualStyleBackColor = true;
+            btn_sel_folder.Click += btn_sel_folder_Click;
+            // 
             // Form_Add_Item
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(392, 405);
+            Controls.Add(btn_sel_folder);
+            Controls.Add(btn_select_file_program);
             Controls.Add(button2);
             Controls.Add(picture_icon_view);
             Controls.Add(label3);
@@ -207,5 +233,8 @@
         private Label label3;
         private PictureBox picture_icon_view;
         private Button button2;
+        private Button btn_select_file_program;
+        private Button btn_sel_folder;
+        private FolderBrowserDialog folderBrowserDialog;
     }
 }

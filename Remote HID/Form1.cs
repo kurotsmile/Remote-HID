@@ -12,7 +12,8 @@ namespace Remote_HID
         public int voice_command = 1;
         public int col_length = 8;
         public int row_length = 8;
-        public string font_family="";
+        public string font_family= "Arial";
+        public float font_size = 13f;
         public IList<Act_item> actItems=new List<Act_item>();
     }
 
@@ -271,7 +272,7 @@ namespace Remote_HID
                         Text = act_data.name,
                         Dock = DockStyle.Fill,
                         BackColor = Color.Blue,
-                        Font = new Font("Segoe UI", 15, FontStyle.Regular),
+                        Font = new Font(this.settings.font_family, this.settings.font_size, FontStyle.Regular),
                         Tag = new Point(i, j),
                         FlatStyle = FlatStyle.Flat,
                         ForeColor = Color.Black

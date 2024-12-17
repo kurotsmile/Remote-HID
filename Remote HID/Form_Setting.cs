@@ -14,9 +14,9 @@
             listView1.View = View.Details;
             listView1.GridLines = true;
             listView1.FullRowSelect = true;
-            listView1.Columns.Add("Name", 80);
-            listView1.Columns.Add("cmd", 100);
-            listView1.Columns.Add("Function", 60);
+            listView1.Columns.Add("Name", 100);
+            listView1.Columns.Add("cmd", 150);
+            listView1.Columns.Add("Function", 100);
 
             this.Update_List();
         }

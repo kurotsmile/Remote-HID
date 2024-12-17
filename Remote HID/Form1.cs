@@ -118,9 +118,9 @@ namespace Remote_HID
             if (this.settings.actItems.Count == 0)
             {
                 this.settings.actItems = new List<Act_item>();
-                this.settings.actItems.Add(new Act_item { name = "Shut down", cmd= "shutdown /s /f /t 0",index_icon=0});
-                this.settings.actItems.Add(new Act_item { name = "Restart", cmd = "shutdown /r /f /t 0", index_icon=1});
-                this.settings.actItems.Add(new Act_item { name = "Sleep", cmd = "rundll32.exe powrprof.dll,SetSuspendState Sleep", index_icon=2});
+                this.settings.actItems.Add(new Act_item { name = "Shut down", func= "Shutdown", index_icon=0});
+                this.settings.actItems.Add(new Act_item { name = "Restart", func = "Restart", index_icon=1});
+                this.settings.actItems.Add(new Act_item { name = "Sleep",func= "SleepPC", index_icon=2});
                 this.settings.actItems.Add(new Act_item { name = "Powershell", cmd = "powershell.exe",index_icon=3});
                 this.settings.actItems.Add(new Act_item { name = "Computer", cmd = "explorer.exe", index_icon=4});
                 this.settings.actItems.Add(new Act_item { name = "Start", cmd = "^{ESC}",func="sendkey",index_icon=5});
@@ -457,6 +457,12 @@ namespace Remote_HID
                     this.Change_status_voice_command();
                 else if (act_data.func == "sendkey")
                     SendKeys.SendWait(act_data.cmd);
+                else if (act_data.func == "Shutdown")
+                    this.actSys.Shutdown();
+                else if (act_data.func == "Restart")
+                    this.actSys.Restart();
+                else if (act_data.func == "SleepPC")
+                    this.actSys.SleepPC();
                 else
                     this.actSys.OpenProgram(act_data.cmd);
 

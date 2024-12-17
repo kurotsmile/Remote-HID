@@ -88,7 +88,7 @@
             // comboBox_func
             // 
             comboBox_func.FormattingEnabled = true;
-            comboBox_func.Items.AddRange(new object[] { "Open Program and url", "sendkey", "OpenTaskView", "OpenProjectMenu", "OpenActionCenter", "NextMedia", "PreviousMedia", "FastForwardMedia", "FastRewindMedia", "PlayPauseMedia", "Change_status_voice_command" });
+            comboBox_func.Items.AddRange(new object[] { "Open Program and url", "sendkey", "OpenTaskView", "OpenProjectMenu", "OpenActionCenter", "NextMedia", "PreviousMedia", "FastForwardMedia", "FastRewindMedia", "PlayPauseMedia", "Change_status_voice_command", "Shutdown" });
             comboBox_func.Location = new Point(12, 90);
             comboBox_func.Name = "comboBox_func";
             comboBox_func.Size = new Size(368, 23);

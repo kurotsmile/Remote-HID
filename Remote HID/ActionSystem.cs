@@ -10,6 +10,9 @@ namespace Remote_HID
         [DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
+        [DllImport("PowrProf.dll", SetLastError = true)]
+        public static extern bool SetSuspendState(bool hibernate, bool forceCritical, bool disableWakeEvent);
+
         private const byte VK_LWIN = 0x5B;
         private const byte VK_TAB = 0x09;
         private const uint KEYEVENTF_KEYUP = 0x0002;
@@ -140,5 +143,27 @@ namespace Remote_HID
             keybd_event(VK_MEDIA_PLAY_PAUSE, 0, KEYEVENTF_KEYUP, 0);
         }
 
+        public void Shutdown()
+        {
+            Process.Start(new ProcessStartInfo("shutdown", "/s /t 0")
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false
+            });
+        }
+
+        public void Restart()
+        {
+            Process.Start(new ProcessStartInfo("shutdown", "/r /t 0")
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false
+            });
+        }
+
+        public void SleepPC()
+        {
+            SetSuspendState(false, true, false);
+        }
     }
 }

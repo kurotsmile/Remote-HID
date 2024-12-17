@@ -36,6 +36,12 @@ namespace Remote_HID
 
         private void btn_sel_font_Click(object sender, EventArgs e)
         {
+            this.fontDialog_label.Font = new Font(
+              this.s_name_font_family_cur,
+              this.s_name_font_size_cur,
+              FontStyle.Regular
+            );
+
             if (this.fontDialog_label.ShowDialog(this) == DialogResult.OK)
             {
                 font_cur = this.fontDialog_label.Font;

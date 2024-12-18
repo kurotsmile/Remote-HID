@@ -1,6 +1,7 @@
 ## Remote HID - Remote Control Menu Creator
 
 Remote HID is a versatile application designed to help users create remote control menus with enhanced functionality for system navigation and control. This tool is specifically tailored for remote control devices, such as air mice, enabling seamless interaction with your computer.
+![screenshot](screenshot.png)
 
 ---
 
@@ -47,6 +48,8 @@ Remote HID is a versatile application designed to help users create remote contr
 
 3. **Activation:**  
    Use the **Apps** key on your keyboard to activate your custom control menu and start controlling your system remotely.
+   
+![screenshot](screenshot1.png)
 
 ---
 

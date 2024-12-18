@@ -36,6 +36,9 @@ namespace Remote_HID
             contextMenuStrip.Items.Add("Cài đặt Menu", null, Show_setting);
             contextMenuStrip.Items.Add("Cài đặt Tabel", null, Show_setting_table);
             contextMenuStrip.Items.Add(new ToolStripSeparator());
+            contextMenuStrip.Items.Add("Donation", null, Show_donation);
+            contextMenuStrip.Items.Add("Support me on Ko-fi", null, Show_Kofi);
+            contextMenuStrip.Items.Add(new ToolStripSeparator());
 
             contextMenuStrip.Items.Add("Thoát", null, this.form1.ExitApp);
             notifyIcon.ContextMenuStrip = contextMenuStrip;
@@ -71,6 +74,18 @@ namespace Remote_HID
         {
             Form_Setting_Tabel ft = new Form_Setting_Tabel(this.form1);
             ft.Show();
+        }
+
+        public void Show_donation(object sender, EventArgs e)
+        {
+            this.form1.PlaySound(Properties.Resources.selectClick);
+            this.form1.actSys.OpenProgram("https://www.paypal.com/paypalme/kurotsmile");
+        }
+
+        public void Show_Kofi(object sender, EventArgs e)
+        {
+            this.form1.PlaySound(Properties.Resources.selectClick);
+            this.form1.actSys.OpenProgram("https://ko-fi.com/thienthanhtran");
         }
     }
 }

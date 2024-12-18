@@ -36,9 +36,9 @@ namespace Remote_HID
 
         private Button[,] buttons;
         private Button btn_voice;
-        
 
-        private ActionSystem actSys;
+
+        public ActionSystem actSys;
         public ActionSpeech actSpeech;
         private string settingsFile = "setting.json";
         public AppSettings settings;
@@ -352,7 +352,7 @@ namespace Remote_HID
             this.settings.row = newRow;
             this.settings.col = newCol;
             HighlightButton(this.settings.row, this.settings.col);
-            this.PlaySound(Properties.Resources.selectClick);
+            if(this.settings.voice_command==0) this.PlaySound(Properties.Resources.selectClick);
             this.SaveSettings(this.settings);
         }
 

@@ -25,6 +25,8 @@ Remote HID is a versatile application designed to help users create remote contr
 5. **Optimized for Remote Devices**  
    - Specially developed to support air mouse devices, enhancing the remote control experience.  
    - Smooth and responsive navigation.
+   
+![screenshot](screenshot2.png)
 
 ---
 
